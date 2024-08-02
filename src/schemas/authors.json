@@ -1,0 +1,89 @@
+{
+    "Create Author": {
+        "endpoint": "POST /authors",
+        "request_body": {
+            "name": "string",
+            "birthdate": "string",
+            "biography": "string",
+            "nationality": "string",
+            "books": [
+                {
+                    "id": "integer",
+                    "title": "string"
+                }
+            ]
+        },
+        "response": [
+            "201 Created",
+            "400 Bad Request"
+        ]
+    },
+    "Read Author": {
+        "endpoint": "GET /authors/{id}",
+        "response": [
+            "200 OK",
+            {
+                "id": "integer",
+                "name": "string",
+                "birthdate": "string",
+                "biography": "string",
+                "nationality": "string",
+                "books": [
+                    {
+                        "id": "integer",
+                        "title": "string"
+                    }
+                ]
+            },
+            "404 Not Found"
+        ]
+    },
+    "Update Author": {
+        "endpoint": "PUT /authors/{id}",
+        "request_body": {
+            "name": "string",
+            "birthdate": "string",
+            "biography": "string",
+            "nationality": "string",
+            "books": [
+                {
+                    "id": "integer",
+                    "title": "string"
+                }
+            ]
+        },
+        "response": [
+            "200 OK",
+            "400 Bad Request",
+            "404 Not Found"
+        ]
+    },
+    "Delete Author": {
+        "endpoint": "DELETE /authors/{id}",
+        "response": [
+            "204 No Content",
+            "404 Not Found"
+        ]
+    },
+    "List Authors": {
+        "endpoint": "GET /authors",
+        "response": [
+            "200 OK",
+            [
+                {
+                    "id": "integer",
+                    "name": "string",
+                    "birthdate": "string",
+                    "biography": "string",
+                    "nationality": "string",
+                    "books": [
+                        {
+                            "id": "integer",
+                            "title": "string"
+                        }
+                    ]
+                }
+            ]
+        ]
+    }
+}

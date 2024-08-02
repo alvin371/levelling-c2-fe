@@ -1,0 +1,85 @@
+{
+    "Create Category": {
+        "endpoint": "POST /categories",
+        "request_body": {
+            "name": "string",
+            "description": "string",
+            "parentCategoryId": "integer",
+            "subcategories": [
+                {
+                    "id": "integer",
+                    "name": "string"
+                }
+            ]
+        },
+        "response": [
+            "201 Created",
+            "400 Bad Request"
+        ]
+    },
+    "Read Category": {
+        "endpoint": "GET /categories/{id}",
+        "response": [
+            "200 OK",
+            {
+                "id": "integer",
+                "name": "string",
+                "description": "string",
+                "parentCategoryId": "integer",
+                "subcategories": [
+                    {
+                        "id": "integer",
+                        "name": "string"
+                    }
+                ]
+            },
+            "404 Not Found"
+        ]
+    },
+    "Update Category": {
+        "endpoint": "PUT /categories/{id}",
+        "request_body": {
+            "name": "string",
+            "description": "string",
+            "parentCategoryId": "integer",
+            "subcategories": [
+                {
+                    "id": "integer",
+                    "name": "string"
+                }
+            ]
+        },
+        "response": [
+            "200 OK",
+            "400 Bad Request",
+            "404 Not Found"
+        ]
+    },
+    "Delete Category": {
+        "endpoint": "DELETE /categories/{id}",
+        "response": [
+            "204 No Content",
+            "404 Not Found"
+        ]
+    },
+    "List Categories": {
+        "endpoint": "GET /categories",
+        "response": [
+            "200 OK",
+            [
+                {
+                    "id": "integer",
+                    "name": "string",
+                    "description": "string",
+                    "parentCategoryId": "integer",
+                    "subcategories": [
+                        {
+                            "id": "integer",
+                            "name": "string"
+                        }
+                    ]
+                }
+            ]
+        ]
+    }
+}
