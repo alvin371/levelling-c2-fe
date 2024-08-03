@@ -40,15 +40,14 @@ export const POST = async (request: Request) => {
     const data: BookResponse = {
       id: books.length + 1,
       title: valid.data.title,
-      authors:
-        valid.data.authorIds.map((id) => {
-          const author = authors.find((author) => author.id === id);
-          if (author === undefined) throw NotFoundException("Author not found");
-          return {
-            id,
-            name: author.name,
-          };
-        }) || [],
+      authors: valid.data.authorIds.map((id) => {
+        const author = authors.find((author) => author.id === id);
+        if (author === undefined) throw NotFoundException("Author not found");
+        return {
+          id,
+          name: author.name,
+        };
+      }),
       isbn: valid.data.isbn,
       publishedDate: valid.data.publishedDate,
       quantity: valid.data.quantity,

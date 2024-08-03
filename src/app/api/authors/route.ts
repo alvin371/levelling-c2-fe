@@ -1,4 +1,8 @@
 import authors from "@/dummies/authors_data.json";
+import books from "@/dummies/books_data.json";
+import { AuthorResponse } from "@/types/authors";
+import { NotFoundException, ZodIssueException } from "@/utils/exceptions";
+import { getErrorStatus } from "@/utils/request";
 import { CreateAuthorRequestSchema } from "@/validations/authors";
 
 export const GET = async (request: Request) => {
@@ -23,14 +27,27 @@ export const GET = async (request: Request) => {
 };
 
 export const POST = async (request: Request) => {
-  const body = await request.json();
-  const valid = await CreateAuthorRequestSchema.safeParseAsync(body);
-  if (valid.error) {
-    return Response.json(
-      { message: valid.error.errors, status: 400 },
-      { status: 400 },
-    );
+  try {
+    const body = await request.json();
+    const valid = await CreateAuthorRequestSchema.safeParseAsync(body);
+    if (valid.error) throw ZodIssueException(valid.error.errors);
+    const data: AuthorResponse = {
+      id: authors.length + 1,
+      name: valid.data.name,
+      birthdate: valid.data.birthdate,
+      biography: valid.data.biography,
+      nationality: valid.data.nationality,
+      books: valid.data.bookIds.map((id) => {
+        const book = books.find((book) => book.id === id);
+        if (book === undefined) throw NotFoundException("Book not found");
+        return {
+          id,
+          title: book.title,
+        };
+      }),
+    };
+    return Response.json({ data, status: 201 }, { status: 201 });
+  } catch (error) {
+    return Response.json(error, { status: getErrorStatus(error) });
   }
-  authors.push(body);
-  return Response.json({ data: body, status: 201 }, { status: 201 });
 };

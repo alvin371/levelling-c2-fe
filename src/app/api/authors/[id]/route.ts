@@ -1,39 +1,53 @@
 import authors from "@/dummies/authors_data.json";
+import books from "@/dummies/books_data.json";
+import { AuthorResponse } from "@/types/authors";
+import { NotFoundException, ZodIssueException } from "@/utils/exceptions";
+import { getErrorStatus } from "@/utils/request";
 import { UpdateAuthorRequestSchema } from "@/validations/authors";
 
 export const GET = async (
   _request: Request,
   { params }: { params: { id: string } },
 ) => {
-  const author = authors.find((author) => author.id.toString() === params.id);
-  if (!author)
-    return Response.json(
-      { message: "Author not found", status: 404 },
-      { status: 404 },
-    );
-  return Response.json({ data: author, status: 200 });
+  try {
+    const author = authors.find((author) => author.id.toString() === params.id);
+    if (!author) throw NotFoundException("Author not found");
+    return Response.json({ data: author, status: 200 });
+  } catch (error) {
+    return Response.json(error, { status: getErrorStatus(error) });
+  }
 };
 
 export const PUT = async (
   request: Request,
   { params }: { params: { id: string } },
 ) => {
-  const body = await request.json();
-  const authorIndex = authors.findIndex(
-    (author) => author.id.toString() === params.id,
-  );
-  if (authorIndex < 0)
-    return Response.json(
-      { message: "Author not found", status: 404 },
-      { status: 404 },
+  try {
+    const body = await request.json();
+    const authorIndex = authors.findIndex(
+      (author) => author.id.toString() === params.id,
     );
-  const valid = UpdateAuthorRequestSchema.safeParse(body);
-  if (valid.error) {
-    return Response.json(
-      { message: valid.error.errors, status: 400 },
-      { status: 400 },
-    );
+    if (authorIndex < 0) throw NotFoundException("Author not found");
+    const valid = UpdateAuthorRequestSchema.safeParse(body);
+    if (valid.error) throw ZodIssueException(valid.error.errors);
+
+    const data: AuthorResponse = authors[authorIndex];
+    if (valid.data.name) data.name = valid.data.name;
+    if (valid.data.birthdate) data.birthdate = valid.data.birthdate;
+    if (valid.data.biography) data.biography = valid.data.biography;
+    if (valid.data.nationality) data.nationality = valid.data.nationality;
+    if (valid.data.bookIds) {
+      data.books = valid.data.bookIds.map((id) => {
+        const book = books.find((book) => book.id === id);
+        if (book === undefined) throw NotFoundException("Book not found");
+        return {
+          id,
+          title: book.title,
+        };
+      });
+    }
+    return Response.json({ data, status: 201 }, { status: 201 });
+  } catch (error) {
+    return Response.json(error, { status: getErrorStatus(error) });
   }
-  authors[authorIndex] = body;
-  return Response.json({ data: body }, { status: 201 });
 };

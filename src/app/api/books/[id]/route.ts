@@ -72,7 +72,7 @@ export const PUT = async (
     }
     if (valid.data.pageCount) data.pageCount = valid.data.pageCount;
     if (valid.data.language) data.language = valid.data.language;
-    return Response.json({ data }, { status: 201 });
+    return Response.json({ data, status: 201 }, { status: 201 });
   } catch (error) {
     return Response.json(error, { status: getErrorStatus(error) });
   }
