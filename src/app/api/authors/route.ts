@@ -2,24 +2,24 @@ import authors from "@/dummies/authors_data.json";
 import { CreateAuthorRequestSchema } from "@/validations/authors";
 
 export const GET = async (request: Request) => {
-  let cloneAuthors = authors;
+  let authorsResponse = authors;
   const url = new URL(request.url);
   const filterName = url.searchParams.get("name");
   const filterBirthdate = url.searchParams.get("birthdate");
 
   if (filterName) {
-    cloneAuthors = cloneAuthors.filter((author) =>
+    authorsResponse = authorsResponse.filter((author) =>
       author.name.toLowerCase().includes(filterName?.toLowerCase()),
     );
   }
 
   if (filterBirthdate) {
-    cloneAuthors = cloneAuthors.filter(
+    authorsResponse = authorsResponse.filter(
       (author) => author.birthdate === filterBirthdate,
     );
   }
 
-  return Response.json({ data: cloneAuthors, status: 200 });
+  return Response.json({ data: authorsResponse, status: 200 });
 };
 
 export const POST = async (request: Request) => {

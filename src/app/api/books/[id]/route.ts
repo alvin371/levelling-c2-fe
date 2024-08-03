@@ -5,6 +5,7 @@ import publishers from "@/dummies/publishers_data.json";
 import { BookResponse } from "@/types/books";
 import { UpdateBookRequestSchema } from "@/validations/books";
 import { NotFoundException, ZodIssueException } from "@/utils/exceptions";
+import { getErrorStatus } from "@/utils/request";
 
 export const GET = async (
   _request: Request,
@@ -17,15 +18,7 @@ export const GET = async (
     if (!bookResponse) throw NotFoundException("Book not found");
     return Response.json({ data: bookResponse, status: 200 });
   } catch (error) {
-    return Response.json(error, {
-      status:
-        error &&
-        typeof error === "object" &&
-        "status" in error &&
-        typeof error.status === "number"
-          ? error.status
-          : 500,
-    });
+    return Response.json(error, { status: getErrorStatus(error) });
   }
 };
 
@@ -81,14 +74,6 @@ export const PUT = async (
     if (valid.data.language) data.language = valid.data.language;
     return Response.json({ data }, { status: 201 });
   } catch (error) {
-    return Response.json(error, {
-      status:
-        error &&
-        typeof error === "object" &&
-        "status" in error &&
-        typeof error.status === "number"
-          ? error.status
-          : 500,
-    });
+    return Response.json(error, { status: getErrorStatus(error) });
   }
 };

@@ -5,6 +5,7 @@ import publishers from "@/dummies/publishers_data.json";
 import { BookResponse } from "@/types/books";
 import { CreateBookRequestSchema } from "@/validations/books";
 import { ZodIssueException, NotFoundException } from "@/utils/exceptions";
+import { getErrorStatus } from "@/utils/request";
 
 export const GET = async (request: Request) => {
   let booksResponse = books;
@@ -70,14 +71,6 @@ export const POST = async (request: Request) => {
     };
     return Response.json({ data, status: 201 }, { status: 201 });
   } catch (error) {
-    return Response.json(error, {
-      status:
-        error &&
-        typeof error === "object" &&
-        "status" in error &&
-        typeof error.status === "number"
-          ? error.status
-          : 500,
-    });
+    return Response.json(error, { status: getErrorStatus(error) });
   }
 };
