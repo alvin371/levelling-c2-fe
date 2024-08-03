@@ -6,12 +6,7 @@ export const CreateUserRequestSchema = z.object({
   password: z.string(),
   membershipDate: z.string(),
   status: z.string(),
-  borrowings: z.array(
-    z.object({
-      id: z.number(),
-      bookTitle: z.string(),
-    }),
-  ),
+  borrowingIds: z.array(z.number()),
 });
 
 export const UpdateUserRequestSchema = z.object({
@@ -20,12 +15,5 @@ export const UpdateUserRequestSchema = z.object({
   password: z.string().optional(),
   membershipDate: z.string().optional(),
   status: z.string().optional(),
-  borrowings: z
-    .array(
-      z.object({
-        id: z.number(),
-        bookTitle: z.string(),
-      }),
-    )
-    .optional(),
+  borrowingIds: z.array(z.number()).optional(),
 });
