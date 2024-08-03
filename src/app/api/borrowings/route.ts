@@ -17,7 +17,12 @@ export const GET = async (request: Request) => {
     );
   }
 
-  return Response.json({ data: borrowingsResponse, status: 200 });
+  return Response.json({
+    data: {
+      borrowings: borrowingsResponse,
+    },
+    status: 200,
+  });
 };
 
 export const POST = async (request: Request) => {

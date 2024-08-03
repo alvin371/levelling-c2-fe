@@ -16,7 +16,7 @@ export const GET = async (request: Request) => {
     );
   }
 
-  return Response.json({ data: authorsResponse, status: 200 });
+  return Response.json({ data: { authors: authorsResponse }, status: 200 });
 };
 
 export const POST = async (request: Request) => {

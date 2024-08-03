@@ -15,7 +15,12 @@ export const GET = async (request: Request) => {
     );
   }
 
-  return Response.json({ data: categoriesResponse, status: 200 });
+  return Response.json({
+    data: {
+      categories: categoriesResponse,
+    },
+    status: 200,
+  });
 };
 
 export const POST = async (request: Request) => {
