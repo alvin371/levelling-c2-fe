@@ -36,7 +36,10 @@ export const POST = async (request: Request) => {
     const parentCategory = categories.find(
       (category) => category.id === valid.data.parentCategoryId,
     );
-    if (parentCategory === undefined && valid.data.parentCategoryId)
+    if (
+      parentCategory === undefined &&
+      valid.data.parentCategoryId !== undefined
+    )
       throw NotFoundException("Parent category not found");
 
     const data: CategoryResponse = {

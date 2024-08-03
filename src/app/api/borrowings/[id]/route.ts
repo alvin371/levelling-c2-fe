@@ -49,13 +49,13 @@ export const PUT = async (
     if (valid.data.borrowedDate) data.borrowedDate = valid.data.borrowedDate;
     if (valid.data.returnDate) data.returnDate = valid.data.returnDate;
     if (valid.data.status) data.status = valid.data.status;
-    if (valid.data.userId) {
+    if (valid.data.userId !== undefined) {
       const user = users.find((user) => user.id === valid.data.userId);
       if (user === undefined) throw NotFoundException("User not found");
       data.user.id = user.id;
       data.user.name = user.name;
     }
-    if (valid.data.bookId) {
+    if (valid.data.bookId !== undefined) {
       const book = books.find((book) => book.id === valid.data.bookId);
       if (book === undefined) throw NotFoundException("Book not found");
       data.book.id = book.id;

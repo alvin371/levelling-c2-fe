@@ -6,8 +6,6 @@ export const CreateBorrowingRequestSchema = z.object({
   borrowedDate: z.string(),
   returnDate: z.string(),
   status: z.string(),
-  user: z.number(),
-  book: z.number(),
 });
 
 export const UpdateBorrowingRequestSchema = z.object({
@@ -16,16 +14,4 @@ export const UpdateBorrowingRequestSchema = z.object({
   borrowedDate: z.string().optional(),
   returnDate: z.string().optional(),
   status: z.string().optional(),
-  user: z
-    .object({
-      id: z.number(),
-      name: z.string(),
-    })
-    .optional(),
-  book: z
-    .object({
-      id: z.number(),
-      title: z.string(),
-    })
-    .optional(),
 });
