@@ -21,11 +21,11 @@ export const POST = async (request: Request) => {
       );
     }
     const parentCategory = categories.find(
-      (category) => category.id === valid.data.parentCategory_id,
+      (category) => category.id === valid.data.parent_category_id,
     );
     if (
       parentCategory === undefined &&
-      valid.data.parentCategory_id !== undefined
+      valid.data.parent_category_id !== undefined
     )
       throw NotFoundException("Parent category not found");
 
@@ -33,7 +33,7 @@ export const POST = async (request: Request) => {
       id: categories.length + 1,
       name: valid.data.name,
       description: valid.data.description,
-      parentCategory: parentCategory
+      parent_category: parentCategory
         ? {
             id: parentCategory.id,
             name: parentCategory.name,

@@ -43,13 +43,13 @@ export const PUT = async (
     const data = categories[categoryIndex];
     if (valid.data.name) data.name = valid.data.name;
     if (valid.data.description) data.description = valid.data.description;
-    if (valid.data.parentCategory_id) {
+    if (valid.data.parent_category_id) {
       const parentCategory = categories.find(
-        (category) => category.id === valid.data.parentCategory_id,
+        (category) => category.id === valid.data.parent_category_id,
       );
       if (parentCategory === undefined)
         throw NotFoundException("Parent category not found");
-      data.parentCategory = {
+      data.parent_category = {
         id: parentCategory.id,
         name: parentCategory.name,
       };

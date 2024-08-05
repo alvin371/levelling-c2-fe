@@ -20,7 +20,7 @@
         "name": "Subcategory 19"
       }
     ],
-    "parentCategory": {
+    "parent_category": {
       "id": 13,
       "name": "Category Name 13"
     }
@@ -35,7 +35,7 @@
         "name": "Subcategory 18"
       }
     ],
-    "parentCategory": {
+    "parent_category": {
       "id": 17,
       "name": "Category Name 17"
     }
@@ -50,7 +50,7 @@
         "name": "Subcategory 20"
       }
     ],
-    "parentCategory": {
+    "parent_category": {
       "id": 10,
       "name": "Category Name 10"
     }
@@ -65,7 +65,7 @@
         "name": "Subcategory 8"
       }
     ],
-    "parentCategory": {
+    "parent_category": {
       "id": 10,
       "name": "Category Name 10"
     }
@@ -113,7 +113,7 @@
         "name": "Subcategory 5"
       }
     ],
-    "parentCategory": {
+    "parent_category": {
       "id": 9,
       "name": "Category Name 9"
     }
@@ -139,7 +139,7 @@
         "name": "Subcategory 3"
       }
     ],
-    "parentCategory": {
+    "parent_category": {
       "id": 12,
       "name": "Category Name 12"
     }
@@ -154,7 +154,7 @@
         "name": "Subcategory 8"
       }
     ],
-    "parentCategory": {
+    "parent_category": {
       "id": 5,
       "name": "Category Name 5"
     }
@@ -169,7 +169,7 @@
         "name": "Subcategory 19"
       }
     ],
-    "parentCategory": {
+    "parent_category": {
       "id": 5,
       "name": "Category Name 5"
     }
@@ -184,7 +184,7 @@
         "name": "Subcategory 12"
       }
     ],
-    "parentCategory": {
+    "parent_category": {
       "id": 19,
       "name": "Category Name 19"
     }
@@ -210,7 +210,7 @@
         "name": "Subcategory 4"
       }
     ],
-    "parentCategory": {
+    "parent_category": {
       "id": 20,
       "name": "Category Name 20"
     }
@@ -225,7 +225,7 @@
         "name": "Subcategory 16"
       }
     ],
-    "parentCategory": {
+    "parent_category": {
       "id": 3,
       "name": "Category Name 3"
     }
@@ -251,7 +251,7 @@
         "name": "Subcategory 9"
       }
     ],
-    "parentCategory": {
+    "parent_category": {
       "id": 4,
       "name": "Category Name 4"
     }

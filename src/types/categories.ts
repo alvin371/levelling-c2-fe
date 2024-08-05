@@ -12,7 +12,7 @@ export interface Subcategory {
 export interface CreateCategoryRequest {
   name: string;
   description: string;
-  parentCategory?: ParrentCategory;
+  parent_category?: ParrentCategory;
   subcategories?: Subcategory[];
 }
 
@@ -20,7 +20,7 @@ export interface CategoryResponse {
   id: number;
   name: string;
   description: string;
-  parentCategory?: ParrentCategory;
+  parent_category?: ParrentCategory;
   subcategories?: Subcategory[];
 }
 
