@@ -44,19 +44,19 @@ export const PUT = async (
     }
     const data = borrowings[borrowingIndex];
 
-    if (valid.data.userId) data.userId = valid.data.userId;
-    if (valid.data.bookId) data.bookId = valid.data.bookId;
-    if (valid.data.borrowedDate) data.borrowedDate = valid.data.borrowedDate;
-    if (valid.data.returnDate) data.returnDate = valid.data.returnDate;
+    if (valid.data.user_id) data.user_id = valid.data.user_id;
+    if (valid.data.book_id) data.book_id = valid.data.book_id;
+    if (valid.data.borrowed_date) data.borrowed_date = valid.data.borrowed_date;
+    if (valid.data.return_date) data.return_date = valid.data.return_date;
     if (valid.data.status) data.status = valid.data.status;
-    if (valid.data.userId !== undefined) {
-      const user = users.find((user) => user.id === valid.data.userId);
+    if (valid.data.user_id !== undefined) {
+      const user = users.find((user) => user.id === valid.data.user_id);
       if (user === undefined) throw NotFoundException("User not found");
       data.user.id = user.id;
       data.user.name = user.name;
     }
-    if (valid.data.bookId !== undefined) {
-      const book = books.find((book) => book.id === valid.data.bookId);
+    if (valid.data.book_id !== undefined) {
+      const book = books.find((book) => book.id === valid.data.book_id);
       if (book === undefined) throw NotFoundException("Book not found");
       data.book.id = book.id;
       data.book.title = book.title;

@@ -43,9 +43,9 @@ export const PUT = async (
     const data = categories[categoryIndex];
     if (valid.data.name) data.name = valid.data.name;
     if (valid.data.description) data.description = valid.data.description;
-    if (valid.data.parentCategoryId) {
+    if (valid.data.parentCategory_id) {
       const parentCategory = categories.find(
-        (category) => category.id === valid.data.parentCategoryId,
+        (category) => category.id === valid.data.parentCategory_id,
       );
       if (parentCategory === undefined)
         throw NotFoundException("Parent category not found");
@@ -54,8 +54,8 @@ export const PUT = async (
         name: parentCategory.name,
       };
     }
-    if (valid.data.subcategoryIds) {
-      data.subcategories = valid.data.subcategoryIds.map((id) => {
+    if (valid.data.subcategory_ids) {
+      data.subcategories = valid.data.subcategory_ids.map((id) => {
         const subcategory = categories.find((category) => category.id === id);
         if (subcategory === undefined)
           throw NotFoundException("Subcategory not found");

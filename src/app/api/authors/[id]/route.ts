@@ -36,8 +36,8 @@ export const PUT = async (
     if (valid.data.birthdate) data.birthdate = valid.data.birthdate;
     if (valid.data.biography) data.biography = valid.data.biography;
     if (valid.data.nationality) data.nationality = valid.data.nationality;
-    if (valid.data.bookIds) {
-      data.books = valid.data.bookIds.map((id) => {
+    if (valid.data.book_ids) {
+      data.books = valid.data.book_ids.map((id) => {
         const book = books.find((book) => book.id === id);
         if (book === undefined) throw NotFoundException("Book not found");
         return {

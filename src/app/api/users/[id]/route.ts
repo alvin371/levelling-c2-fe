@@ -43,17 +43,17 @@ export const PUT = async (
     if (valid.data.name) data.name = valid.data.name;
     if (valid.data.email) data.email = valid.data.email;
     if (valid.data.password) data.password = valid.data.password;
-    if (valid.data.membershipDate)
-      data.membershipDate = valid.data.membershipDate;
+    if (valid.data.membership_date)
+      data.membership_date = valid.data.membership_date;
     if (valid.data.status) data.status = valid.data.status;
-    if (valid.data.borrowingIds) {
-      data.borrowings = valid.data.borrowingIds.map((id) => {
+    if (valid.data.borrowing_ids) {
+      data.borrowings = valid.data.borrowing_ids.map((id) => {
         const borrowing = borrowings.find((borrowing) => borrowing.id === id);
         if (borrowing === undefined)
           throw NotFoundException("Borrowing not found");
         return {
           id,
-          bookTitle: borrowing.book.title,
+          book_title: borrowing.book.title,
         };
       });
     }

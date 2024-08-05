@@ -1,27 +1,14 @@
 import categories from "@/dummies/categories_data.json";
 import { CategoryResponse } from "@/types/categories";
 import { NotFoundException } from "@/utils/exceptions";
+import { createApi, search, sort } from "@/utils/filter";
 import { getErrorStatus } from "@/utils/request";
 import { CreateCategoryRequestSchema } from "@/validations/categories";
 
-export const GET = async (request: Request) => {
-  let categoriesResponse = categories;
-  const url = new URL(request.url);
-  const filterName = url.searchParams.get("name");
-
-  if (filterName) {
-    categoriesResponse = categoriesResponse.filter((author) =>
-      author.name.toLowerCase().includes(filterName?.toLowerCase()),
-    );
-  }
-
-  return Response.json({
-    data: {
-      categories: categoriesResponse,
-    },
-    status: 200,
-  });
-};
+export const GET = createApi(categories, [
+  search({ fields: ["name", "description"] }),
+  sort({ fields: ["id", "name"] }),
+]);
 
 export const POST = async (request: Request) => {
   try {
@@ -34,11 +21,11 @@ export const POST = async (request: Request) => {
       );
     }
     const parentCategory = categories.find(
-      (category) => category.id === valid.data.parentCategoryId,
+      (category) => category.id === valid.data.parentCategory_id,
     );
     if (
       parentCategory === undefined &&
-      valid.data.parentCategoryId !== undefined
+      valid.data.parentCategory_id !== undefined
     )
       throw NotFoundException("Parent category not found");
 
@@ -52,7 +39,7 @@ export const POST = async (request: Request) => {
             name: parentCategory.name,
           }
         : undefined,
-      subcategories: valid.data.subcategoryIds?.map((id) => {
+      subcategories: valid.data.subcategory_ids?.map((id) => {
         const subcategory = categories.find((category) => category.id === id);
         if (subcategory === undefined)
           throw NotFoundException("Subcategory not found");

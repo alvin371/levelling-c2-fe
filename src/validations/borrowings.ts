@@ -1,17 +1,17 @@
 import { z } from "zod";
 
 export const CreateBorrowingRequestSchema = z.object({
-  userId: z.number(),
-  bookId: z.number(),
-  borrowedDate: z.string(),
-  returnDate: z.string(),
+  user_id: z.number(),
+  book_id: z.number(),
+  borrowed_date: z.string(),
+  return_date: z.string(),
   status: z.string(),
 });
 
 export const UpdateBorrowingRequestSchema = z.object({
-  userId: z.number().optional(),
-  bookId: z.number().optional(),
-  borrowedDate: z.string().optional(),
-  returnDate: z.string().optional(),
+  user_id: z.number().optional(),
+  book_id: z.number().optional(),
+  borrowed_date: z.string().optional(),
+  return_date: z.string().optional(),
   status: z.string().optional(),
 });

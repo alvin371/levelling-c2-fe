@@ -4,20 +4,13 @@ import { UserResponse } from "@/types/users";
 import { NotFoundException, ZodIssueException } from "@/utils/exceptions";
 import { CreateUserRequestSchema } from "@/validations/users";
 import { getErrorStatus } from "@/utils/request";
+import { createApi, eq, filter, search, sort } from "@/utils/filter";
 
-export const GET = async (request: Request) => {
-  let authorsResponse = users;
-  const url = new URL(request.url);
-  const filterName = url.searchParams.get("name");
-
-  if (filterName) {
-    authorsResponse = authorsResponse.filter((author) =>
-      author.name.toLowerCase().includes(filterName?.toLowerCase()),
-    );
-  }
-
-  return Response.json({ data: { authors: authorsResponse }, status: 200 });
-};
+export const GET = createApi(users, [
+  search({ fields: ["name", "email"] }),
+  sort({ fields: ["id", "name", "email", "membership_date"] }),
+  filter([eq({ field: "membership_date" })]),
+]);
 
 export const POST = async (request: Request) => {
   try {
@@ -28,9 +21,9 @@ export const POST = async (request: Request) => {
       id: users.length + 1,
       name: valid.data.name,
       email: valid.data.email,
-      membershipDate: valid.data.membershipDate,
+      membershipDate: valid.data.membership_date,
       status: valid.data.status,
-      borrowings: valid.data.borrowingIds.map((id) => {
+      borrowings: valid.data.borrowing_ids.map((id) => {
         const borrowing = borrowings.find((borrowing) => borrowing.id === id);
         if (borrowing === undefined)
           throw NotFoundException("Borrowing not found");

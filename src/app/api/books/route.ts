@@ -6,25 +6,13 @@ import { BookResponse } from "@/types/books";
 import { CreateBookRequestSchema } from "@/validations/books";
 import { ZodIssueException, NotFoundException } from "@/utils/exceptions";
 import { getErrorStatus } from "@/utils/request";
+import { createApi, eq, filter, search, sort } from "@/utils/filter";
 
-export const GET = async (request: Request) => {
-  let booksResponse = books;
-  const url = new URL(request.url);
-  const filterTitle = url.searchParams.get("title");
-
-  if (filterTitle) {
-    booksResponse = booksResponse.filter((book) =>
-      book.title.toLowerCase().includes(filterTitle?.toLowerCase()),
-    );
-  }
-
-  return Response.json({
-    data: {
-      books: booksResponse,
-    },
-    status: 200,
-  });
-};
+export const GET = createApi(books, [
+  search({ fields: ["title"] }),
+  sort({ fields: ["id", "title", "published_date"] }),
+  filter([eq({ field: "isbn" })]),
+]);
 
 export const POST = async (request: Request) => {
   try {
@@ -34,13 +22,13 @@ export const POST = async (request: Request) => {
       throw ZodIssueException(valid.error.errors);
     }
     const publisher = publishers.find(
-      (publisher) => publisher.id === valid.data.publisherId,
+      (publisher) => publisher.id === valid.data.publisher_id,
     );
     if (publisher === undefined) throw NotFoundException("Publisher not found");
     const data: BookResponse = {
       id: books.length + 1,
       title: valid.data.title,
-      authors: valid.data.authorIds.map((id) => {
+      authors: valid.data.author_ids.map((id) => {
         const author = authors.find((author) => author.id === id);
         if (author === undefined) throw NotFoundException("Author not found");
         return {
@@ -49,9 +37,9 @@ export const POST = async (request: Request) => {
         };
       }),
       isbn: valid.data.isbn,
-      publishedDate: valid.data.publishedDate,
+      published_date: valid.data.published_date,
       quantity: valid.data.quantity,
-      categories: valid.data.categoryIds.map((id) => {
+      categories: valid.data.category_ids.map((id) => {
         const category = categories.find((category) => category.id === id);
         if (category === undefined)
           throw NotFoundException("Category not found");
@@ -65,7 +53,7 @@ export const POST = async (request: Request) => {
         id: publisher.id,
         name: publisher.name,
       },
-      pageCount: valid.data.pageCount,
+      page_count: valid.data.page_count,
       language: valid.data.language,
     };
     return Response.json({ data, status: 201 }, { status: 201 });

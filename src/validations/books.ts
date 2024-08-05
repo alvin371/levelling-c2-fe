@@ -3,26 +3,26 @@ import { z } from "zod";
 
 export const CreateBookRequestSchema = z.object({
   title: z.string(),
-  authorIds: z.array(z.number()),
+  author_ids: z.array(z.number()),
   isbn: z.string(),
-  publishedDate: z.string(),
+  published_date: z.string(),
   quantity: z.number(),
-  categoryIds: z.array(z.number()),
+  category_ids: z.array(z.number()),
   description: z.string(),
-  publisherId: z.number(),
-  pageCount: z.number(),
+  publisher_id: z.number(),
+  page_count: z.number(),
   language: z.string(),
 });
 
 export const UpdateBookRequestSchema = z.object({
   title: z.string().optional(),
-  authorIds: z.array(z.number()).optional(),
+  author_ids: z.array(z.number()).optional(),
   isbn: z.string().optional(),
-  publishedDate: z.string().optional(),
+  published_date: z.string().optional(),
   quantity: z.number().optional(),
-  categoryIds: z.array(z.number()).optional(),
+  category_ids: z.array(z.number()).optional(),
   description: z.string().optional(),
-  publisherId: z.number().optional(),
-  pageCount: z.number().optional(),
+  publisher_id: z.number().optional(),
+  page_count: z.number().optional(),
   language: z.string().optional(),
 });

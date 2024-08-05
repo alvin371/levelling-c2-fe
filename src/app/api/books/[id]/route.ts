@@ -38,8 +38,8 @@ export const PUT = async (
 
     const data: BookResponse = books[bookIndex];
     if (valid.data.title) data.title = valid.data.title;
-    if (valid.data.authorIds)
-      data.authors = valid.data.authorIds.map((id) => {
+    if (valid.data.author_ids)
+      data.authors = valid.data.author_ids.map((id) => {
         const author = authors.find((author) => author.id === id);
         if (author === undefined) throw NotFoundException("Author not found");
         return {
@@ -48,10 +48,11 @@ export const PUT = async (
         };
       });
     if (valid.data.isbn) data.isbn = valid.data.isbn;
-    if (valid.data.publishedDate) data.publishedDate = valid.data.publishedDate;
+    if (valid.data.published_date)
+      data.published_date = valid.data.published_date;
     if (valid.data.quantity) data.quantity = valid.data.quantity;
-    if (valid.data.categoryIds)
-      data.categories = valid.data.categoryIds.map((id) => {
+    if (valid.data.category_ids)
+      data.categories = valid.data.category_ids.map((id) => {
         const category = categories.find((category) => category.id === id);
         if (category === undefined)
           throw NotFoundException("Category not found");
@@ -61,16 +62,16 @@ export const PUT = async (
         };
       });
     if (valid.data.description) data.description = valid.data.description;
-    if (valid.data.publisherId) {
+    if (valid.data.publisher_id) {
       const publisher = publishers.find(
-        (publisher) => publisher.id === valid.data.publisherId,
+        (publisher) => publisher.id === valid.data.publisher_id,
       );
       if (publisher === undefined)
         throw NotFoundException("Publisher not found");
-      data.publisher.id = valid.data.publisherId;
+      data.publisher.id = valid.data.publisher_id;
       data.publisher.name = publisher.name;
     }
-    if (valid.data.pageCount) data.pageCount = valid.data.pageCount;
+    if (valid.data.page_count) data.page_count = valid.data.page_count;
     if (valid.data.language) data.language = valid.data.language;
     return Response.json({ data, status: 201 }, { status: 201 });
   } catch (error) {
