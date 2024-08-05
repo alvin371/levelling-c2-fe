@@ -1,7 +1,7 @@
 import borrowings from "@/dummies/borrowings_data.json";
 import users from "@/dummies/users_data.json";
 import books from "@/dummies/books_data.json";
-import { NotFoundException } from "@/utils/exceptions";
+import { NotFoundException, ZodIssueException } from "@/utils/exceptions";
 import { getErrorStatus } from "@/utils/request";
 import { UpdateBorrowingRequestSchema } from "@/validations/borrowings";
 
@@ -29,19 +29,11 @@ export const PUT = async (
     const borrowingIndex = borrowings.findIndex(
       (borrowing) => borrowing.id.toString() === params.id,
     );
-    if (borrowingIndex < 0)
-      return Response.json(
-        { message: "Borrowing not found", status: 404 },
-        { status: 404 },
-      );
+    if (borrowingIndex < 0) throw NotFoundException("Borrowing not found");
 
     const valid = UpdateBorrowingRequestSchema.safeParse(body);
-    if (valid.error) {
-      return Response.json(
-        { message: valid.error.errors, status: 400 },
-        { status: 400 },
-      );
-    }
+    if (valid.error) throw ZodIssueException(valid.error.errors);
+
     const data = borrowings[borrowingIndex];
 
     if (valid.data.user_id) data.user_id = valid.data.user_id;
@@ -63,6 +55,25 @@ export const PUT = async (
     }
 
     return Response.json({ data, status: 201 }, { status: 201 });
+  } catch (error) {
+    return Response.json(error, { status: getErrorStatus(error) });
+  }
+};
+
+export const DELETE = async (
+  _request: Request,
+  { params }: { params: { id: string } },
+) => {
+  try {
+    const borrowingIndex = borrowings.findIndex(
+      (borrowing) => borrowing.id.toString() === params.id,
+    );
+    if (borrowingIndex < 0) throw NotFoundException("Borrowing not found");
+
+    return Response.json({
+      data: `Borrowing with id ${params.id} deleted`,
+      status: 200,
+    });
   } catch (error) {
     return Response.json(error, { status: getErrorStatus(error) });
   }

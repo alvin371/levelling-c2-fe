@@ -5,7 +5,6 @@ export const CreateAuthorRequestSchema = z.object({
   birthdate: z.string(),
   biography: z.string(),
   nationality: z.string(),
-  book_ids: z.array(z.number()),
 });
 
 export const UpdateAuthorRequestSchema = z.object({
@@ -13,5 +12,4 @@ export const UpdateAuthorRequestSchema = z.object({
   birthdate: z.string().optional(),
   biography: z.string().optional(),
   nationality: z.string().optional(),
-  book_ids: z.array(z.number()).optional(),
 });

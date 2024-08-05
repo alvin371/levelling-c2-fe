@@ -36,17 +36,26 @@ export const PUT = async (
     if (valid.data.birthdate) data.birthdate = valid.data.birthdate;
     if (valid.data.biography) data.biography = valid.data.biography;
     if (valid.data.nationality) data.nationality = valid.data.nationality;
-    if (valid.data.book_ids) {
-      data.books = valid.data.book_ids.map((id) => {
-        const book = books.find((book) => book.id === id);
-        if (book === undefined) throw NotFoundException("Book not found");
-        return {
-          id,
-          title: book.title,
-        };
-      });
-    }
     return Response.json({ data, status: 201 }, { status: 201 });
+  } catch (error) {
+    return Response.json(error, { status: getErrorStatus(error) });
+  }
+};
+
+export const DELETE = async (
+  _request: Request,
+  { params }: { params: { id: string } },
+) => {
+  try {
+    const authorIndex = authors.findIndex(
+      (author) => author.id.toString() === params.id,
+    );
+    if (authorIndex < 0) throw NotFoundException("Author not found");
+
+    return Response.json({
+      data: `Author with id ${params.id} deleted`,
+      status: 200,
+    });
   } catch (error) {
     return Response.json(error, { status: getErrorStatus(error) });
   }

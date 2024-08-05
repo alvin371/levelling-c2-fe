@@ -1,7 +1,6 @@
 import authors from "@/dummies/authors_data.json";
-import books from "@/dummies/books_data.json";
 import { AuthorResponse } from "@/types/authors";
-import { NotFoundException, ZodIssueException } from "@/utils/exceptions";
+import { ZodIssueException } from "@/utils/exceptions";
 import { createApi, eq, filter, search, sort } from "@/utils/filter";
 import { getErrorStatus } from "@/utils/request";
 import { CreateAuthorRequestSchema } from "@/validations/authors";
@@ -23,14 +22,6 @@ export const POST = async (request: Request) => {
       birthdate: valid.data.birthdate,
       biography: valid.data.biography,
       nationality: valid.data.nationality,
-      books: valid.data.book_ids.map((id) => {
-        const book = books.find((book) => book.id === id);
-        if (book === undefined) throw NotFoundException("Book not found");
-        return {
-          id,
-          title: book.title,
-        };
-      }),
     };
     return Response.json({ data, status: 201 }, { status: 201 });
   } catch (error) {

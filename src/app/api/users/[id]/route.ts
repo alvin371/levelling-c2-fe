@@ -1,6 +1,6 @@
 import users from "@/dummies/users_data.json";
 import borrowings from "@/dummies/borrowings_data.json";
-import { NotFoundException } from "@/utils/exceptions";
+import { NotFoundException, ZodIssueException } from "@/utils/exceptions";
 import { getErrorStatus } from "@/utils/request";
 import { UpdateUserRequestSchema } from "@/validations/users";
 
@@ -26,19 +26,11 @@ export const PUT = async (
     const userIndex = users.findIndex(
       (user) => user.id.toString() === params.id,
     );
-    if (userIndex < 0)
-      return Response.json(
-        { message: "User not found", status: 404 },
-        { status: 404 },
-      );
+    if (userIndex < 0) throw NotFoundException("User not found");
 
     const valid = UpdateUserRequestSchema.safeParse(body);
-    if (valid.error) {
-      return Response.json(
-        { message: valid.error.errors, status: 400 },
-        { status: 400 },
-      );
-    }
+    if (valid.error) throw ZodIssueException(valid.error.errors);
+
     const data = users[userIndex];
     if (valid.data.name) data.name = valid.data.name;
     if (valid.data.email) data.email = valid.data.email;
@@ -51,6 +43,7 @@ export const PUT = async (
         const borrowing = borrowings.find((borrowing) => borrowing.id === id);
         if (borrowing === undefined)
           throw NotFoundException("Borrowing not found");
+
         return {
           id,
           book_title: borrowing.book.title,
@@ -58,6 +51,23 @@ export const PUT = async (
       });
     }
     return Response.json({ data, status: 201 }, { status: 201 });
+  } catch (error) {
+    return Response.json(error, { status: getErrorStatus(error) });
+  }
+};
+
+export const DELETE = async (
+  _request: Request,
+  { params }: { params: { id: string } },
+) => {
+  try {
+    const filterUser = users.find((user) => user.id.toString() === params.id);
+    if (!filterUser) throw NotFoundException("User not found");
+
+    return Response.json({
+      data: `User with id ${params.id} deleted`,
+      status: 200,
+    });
   } catch (error) {
     return Response.json(error, { status: getErrorStatus(error) });
   }

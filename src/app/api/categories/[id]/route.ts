@@ -1,5 +1,5 @@
 import categories from "@/dummies/categories_data.json";
-import { NotFoundException } from "@/utils/exceptions";
+import { NotFoundException, ZodIssueException } from "@/utils/exceptions";
 import { getErrorStatus } from "@/utils/request";
 import { UpdateCategoryRequestSchema } from "@/validations/categories";
 
@@ -27,19 +27,11 @@ export const PUT = async (
     (category) => category.id.toString() === params.id,
   );
   try {
-    if (categoryIndex < 0)
-      return Response.json(
-        { message: "Category not found", status: 404 },
-        { status: 404 },
-      );
+    if (categoryIndex < 0) throw NotFoundException("Category not found");
 
     const valid = UpdateCategoryRequestSchema.safeParse(body);
-    if (valid.error) {
-      return Response.json(
-        { message: valid.error.errors, status: 400 },
-        { status: 400 },
-      );
-    }
+    if (valid.error) throw ZodIssueException(valid.error.errors);
+
     const data = categories[categoryIndex];
     if (valid.data.name) data.name = valid.data.name;
     if (valid.data.description) data.description = valid.data.description;
@@ -66,6 +58,25 @@ export const PUT = async (
       });
     }
     return Response.json({ data, status: 201 }, { status: 201 });
+  } catch (error) {
+    return Response.json(error, { status: getErrorStatus(error) });
+  }
+};
+
+export const DELETE = async (
+  _request: Request,
+  { params }: { params: { id: string } },
+) => {
+  try {
+    const categoryIndex = categories.findIndex(
+      (category) => category.id.toString() === params.id,
+    );
+    if (categoryIndex < 0) throw NotFoundException("Category not found");
+
+    return Response.json({
+      data: `Category with id ${params.id} deleted`,
+      status: 200,
+    });
   } catch (error) {
     return Response.json(error, { status: getErrorStatus(error) });
   }

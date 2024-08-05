@@ -78,3 +78,22 @@ export const PUT = async (
     return Response.json(error, { status: getErrorStatus(error) });
   }
 };
+
+export const DELETE = async (
+  _request: Request,
+  { params }: { params: { id: string } },
+) => {
+  try {
+    const bookIndex = books.findIndex(
+      (book) => book.id.toString() === params.id,
+    );
+    if (bookIndex < 0) throw NotFoundException("Book not found");
+
+    return Response.json({
+      data: `Book with id ${params.id} deleted`,
+      status: 200,
+    });
+  } catch (error) {
+    return Response.json(error, { status: getErrorStatus(error) });
+  }
+};
