@@ -5,6 +5,11 @@ export type TPaginationResponse<T, M = TPaginationMeta> = {
   meta: M;
 };
 
+export type TResponse<T> = {
+  data: T;
+  status: number;
+};
+
 export type TPaginationMeta = {
   page: number;
   current_page: number;

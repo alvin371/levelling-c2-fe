@@ -1,10 +1,11 @@
 "use client";
 
-import { Route } from "@/commons/routes";
+import { Route, route } from "@/commons/routes";
 import {
   DeleteOutlined,
   FilterOutlined,
   PlusOutlined,
+  SortAscendingOutlined,
 } from "@ant-design/icons";
 import { ActionTable, DataTable, Page, Tabs } from "admiral";
 import { Button, Modal } from "antd";
@@ -12,8 +13,12 @@ import { useDeleteAuthor, useGetListAuthor } from "../_hooks";
 import { ColumnType } from "antd/es/table";
 import { TAuthors } from "../_modules/type";
 import { useRouter } from "next/navigation";
-import { useFilter } from "@/utils/table-filter";
+import { TFilter, useFilter } from "@/utils/table-filter";
 import RowActionButtons from "admiral/table/row-action-button";
+import { SelectProps } from "antd/lib";
+import { TFilterItem } from "admiral/table/filter-collection/factory";
+import { filterSort } from "../_components/filter";
+
 const AuthorClient = () => {
   const router = useRouter();
   const { implementDataTable, setFilter, filter } = useFilter();
@@ -61,7 +66,7 @@ const AuthorClient = () => {
             {
               type: "edit",
               title: "Edit Author",
-              href: `${Route.AUTHOR_EDIT}/${record.id}`,
+              href: route(Route.AUTHOR_EDIT, { id: record.id.toString() }),
             },
             {
               type: "delete",
@@ -111,21 +116,14 @@ const AuthorClient = () => {
         searchValue={filter.search}
         onFiltersChange={(values) => setFilter(values)}
         filters={[
-          {
-            label: "filter",
-            name: "filter",
-            type: "Group",
-            icon: <FilterOutlined />,
-            filters: [
-              {
-                label: "Status",
-                name: "status",
-                type: "Select",
-                placeholder: "Choose Status",
-                value: filter.status,
-              },
+          filterSort({
+            options: [
+              { label: "ID", value: "id" },
+              { label: "Name", value: "name" },
+              { label: "Birthdate", value: "birthdate" },
             ],
-          },
+            searchParams: filter,
+          }),
         ]}
       />
       <div

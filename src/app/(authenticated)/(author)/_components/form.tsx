@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Page } from "admiral";
 import {
@@ -12,12 +12,14 @@ import {
   Typography,
   message,
   notification,
+  DatePicker,
 } from "antd";
 import { Store } from "antd/es/form/interface";
 import { z } from "zod";
 import { createZodSync } from "@/utils/zod-sync";
 import { TAuthors } from "../_modules/type";
 import { Route } from "@/commons/routes";
+import dayjs from "dayjs";
 
 // Define the Zod schema
 export const AuthorSchema = z.object({
@@ -49,29 +51,56 @@ export const FormAuthor: React.FC<{
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+  useEffect(() => {
+    if (data) {
+      form.setFieldsValue({
+        name: data.name,
+        birthdate: data.birthdate ? dayjs(data.birthdate) : null,
+        biography: data.biography,
+        nationality: data.nationality,
+      });
+    }
+  }, [data, form]);
+
   const onFinish = async (values: Store) => {
-    const formValue = AuthorSchema.safeParse(values);
+    const birthdate = values.birthdate
+      ? values.birthdate.format("YYYY-MM-DD")
+      : "";
+    const formValue = AuthorSchema.safeParse({
+      ...values,
+      birthdate,
+    });
     setIsLoading(true);
     try {
       if (formValue.success) {
         if (isUpdate) {
-          //   await updateAuthor({ ...formValue.data });
+          // await updateAuthor({ ...formValue.data });
         } else {
-          //   await createAuthor({ ...formValue.data });
+          // await createAuthor({ ...formValue.data });
         }
         notification.success({
           message: `Author ${isUpdate ? "updated" : "created"} successfully`,
         });
-        router.push("/authors"); // Update the route as needed
+        router.push(Route.AUTHOR); // Update the route as needed
+      } else {
+        // Show validation errors if any
+        formValue.error.issues.forEach((issue) => {
+          message.error(issue.message);
+        });
       }
     } catch (error) {
       message.error("Data not valid, please check your form");
+    } finally {
       setIsLoading(false);
     }
   };
 
   const handleCancel = () => {
     router.push(Route.AUTHOR); // Update the route as needed
+  };
+
+  const handleDateChange = (date: dayjs.Dayjs | null) => {
+    form.setFieldsValue({ birthdate: date });
   };
 
   return (
@@ -81,7 +110,7 @@ export const FormAuthor: React.FC<{
         { label: "Authors", path: Route.AUTHOR },
         {
           label: isUpdate ? "Edit Author" : "Create Author",
-          path: isUpdate ? Route.AUTHOR_CREATE : Route.AUTHOR_EDIT,
+          path: isUpdate ? Route.AUTHOR_EDIT : Route.AUTHOR_CREATE,
         },
       ]}
     >
@@ -93,12 +122,7 @@ export const FormAuthor: React.FC<{
           borderRadius: "8px",
         }}
       >
-        <Form
-          form={form}
-          onFinish={onFinish}
-          style={{ width: "100%" }}
-          initialValues={data}
-        >
+        <Form form={form} onFinish={onFinish} style={{ width: "100%" }}>
           <Row gutter={[16, 16]}>
             <Col span={12}>
               <Typography.Title level={5}>
@@ -133,10 +157,11 @@ export const FormAuthor: React.FC<{
                 validateTrigger="onBlur"
                 required
               >
-                <Input
-                  placeholder="Enter birthdate"
+                <DatePicker
+                  format="YYYY-MM-DD"
+                  style={{ width: "100%" }}
                   disabled={isLoading}
-                  maxLength={10}
+                  onChange={handleDateChange}
                 />
               </Form.Item>
             </Col>
@@ -196,3 +221,5 @@ export const FormAuthor: React.FC<{
     </Page>
   );
 };
+
+export default FormAuthor;

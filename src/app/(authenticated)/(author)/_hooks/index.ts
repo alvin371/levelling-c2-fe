@@ -3,7 +3,7 @@ import { TAuthors, TIndexAuthorsQueryParams } from "../_modules/type";
 import { AuthorQueryKey } from "@/commons/constants";
 import { ENDPOINTS } from "@/commons/endpoints";
 import { api } from "@/utils/fetcher";
-import { TPaginationResponse } from "@/commons/types/api";
+import { TPaginationResponse, TResponse } from "@/commons/types/api";
 import { notification } from "antd";
 import { errorResponse } from "@/utils/error-response";
 
@@ -15,6 +15,18 @@ export const useGetListAuthor = (params: TIndexAuthorsQueryParams) => {
         params,
       }),
     select: (data) => data || [],
+  });
+
+  return {
+    ...authorQuery,
+  };
+};
+
+export const useGetDetailAuthor = (id: string) => {
+  const authorQuery = useQuery({
+    queryKey: [AuthorQueryKey.DETAIL, id],
+    queryFn: () => api.get<TResponse<TAuthors>>(ENDPOINTS.AUTHORS + "/" + id),
+    select: (data) => data.data || {},
   });
 
   return {
@@ -51,5 +63,74 @@ export const useDeleteAuthor = () => {
   return {
     handleSubmit,
     ...deleteUserMutation,
+  };
+};
+
+export const useCreateAuthor = (data: TAuthors) => {
+  const queryClient = useQueryClient();
+
+  const createUserMutation = useMutation({
+    mutationKey: [AuthorQueryKey.CREATE],
+    mutationFn: (data: TAuthors) => api.post<TAuthors>(ENDPOINTS.AUTHORS, data),
+    onSuccess: () => {
+      notification.success({
+        message: "Author created successfully",
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: [AuthorQueryKey.LIST],
+      });
+    },
+    onError: (error) => {
+      if (error instanceof Error) {
+        notification.error({
+          message: errorResponse(error.message)?.error_message,
+        });
+      }
+    },
+  });
+
+  const handleSubmit = () => {
+    createUserMutation.mutate(data);
+  };
+
+  return {
+    handleSubmit,
+    ...createUserMutation,
+  };
+};
+
+export const useUpdateAuthor = (data: TAuthors) => {
+  const queryClient = useQueryClient();
+
+  const updateUserMutation = useMutation({
+    mutationKey: [AuthorQueryKey.UPDATE],
+    mutationFn: (data: TAuthors) =>
+      api.put<TAuthors>(ENDPOINTS.AUTHORS + "/" + data.id, data),
+    onSuccess: () => {
+      notification.success({
+        message: "Author updated successfully",
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: [AuthorQueryKey.LIST],
+      });
+    },
+    onError: (error) => {
+      if (error instanceof Error) {
+        notification.error({
+          message: errorResponse(error.message)?.error_message,
+        });
+      }
+    },
+  });
+
+  const handleSubmit = () => {
+    updateUserMutation.mutate(data);
+  };
+
+  return {
+    handleSubmit,
+    ...updateUserMutation,
   };
 };
