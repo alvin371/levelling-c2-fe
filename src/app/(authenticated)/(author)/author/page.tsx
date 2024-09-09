@@ -46,39 +46,42 @@ const AuthorClient = () => {
     {
       title: "Action",
       dataIndex: "id",
-      render: (value, record) => (
-        <RowActionButtons
-          actions={[
-            {
-              type: "view",
-              title: "Detail Author",
-              href: `${Route.AUTHOR_DETAIL}${record.id}`,
-            },
-            {
-              type: "edit",
-              title: "Edit Author",
-              href: route(Route.AUTHOR_EDIT, { id: record.id.toString() }),
-            },
-            {
-              type: "delete",
-              title: "Delete Author",
-              onClick: () => {
-                Modal.confirm({
-                  title: "Delete Author",
-                  okType: "danger",
-                  content:
-                    "Data that has been deleted cannot be restored. Are you sure you want to delete this author?",
-                  icon: <DeleteOutlined />,
-                  onOk: () => handleSubmit(record.id.toString()),
-                  okButtonProps: {
-                    loading: isPending,
-                  },
-                });
+      render: (value, record) => {
+        const recordId = record?.id?.toString();
+        return (
+          <RowActionButtons
+            actions={[
+              {
+                type: "view",
+                title: "Detail Author",
+                href: `${Route.AUTHOR_DETAIL}${record.id}`,
               },
-            },
-          ]}
-        />
-      ),
+              {
+                type: "edit",
+                title: "Edit Author",
+                href: route(Route.AUTHOR_EDIT, { id: recordId! }),
+              },
+              {
+                type: "delete",
+                title: "Delete Author",
+                onClick: () => {
+                  Modal.confirm({
+                    title: "Delete Author",
+                    okType: "danger",
+                    content:
+                      "Data that has been deleted cannot be restored. Are you sure you want to delete this author?",
+                    icon: <DeleteOutlined />,
+                    onOk: () => handleSubmit(recordId!),
+                    okButtonProps: {
+                      loading: isPending,
+                    },
+                  });
+                },
+              },
+            ]}
+          />
+        );
+      },
     },
   ];
   return (
