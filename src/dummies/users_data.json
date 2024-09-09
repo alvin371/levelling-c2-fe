@@ -1,0 +1,282 @@
+[
+  {
+    "id": 1,
+    "name": "User Name 1",
+    "email": "user1@example.com",
+    "password": "password1",
+    "membership_date": "2019-02-12",
+    "status": "Active",
+    "borrowings": [
+      {
+        "id": 9,
+        "book_title": "Book Title 17"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "User Name 2",
+    "email": "user2@example.com",
+    "password": "password2",
+    "membership_date": "2021-06-28",
+    "status": "Inactive",
+    "borrowings": [
+      {
+        "id": 15,
+        "book_title": "Book Title 1"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "User Name 3",
+    "email": "user3@example.com",
+    "password": "password3",
+    "membership_date": "2018-03-24",
+    "status": "Active",
+    "borrowings": [
+      {
+        "id": 6,
+        "book_title": "Book Title 14"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "User Name 4",
+    "email": "user4@example.com",
+    "password": "password4",
+    "membership_date": "2015-10-13",
+    "status": "Banned",
+    "borrowings": [
+      {
+        "id": 16,
+        "book_title": "Book Title 4"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "User Name 5",
+    "email": "user5@example.com",
+    "password": "password5",
+    "membership_date": "2016-08-05",
+    "status": "Banned",
+    "borrowings": [
+      {
+        "id": 7,
+        "book_title": "Book Title 7"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "User Name 6",
+    "email": "user6@example.com",
+    "password": "password6",
+    "membership_date": "2016-06-20",
+    "status": "Active",
+    "borrowings": [
+      {
+        "id": 12,
+        "book_title": "Book Title 7"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "User Name 7",
+    "email": "user7@example.com",
+    "password": "password7",
+    "membership_date": "2016-10-01",
+    "status": "Active",
+    "borrowings": [
+      {
+        "id": 17,
+        "book_title": "Book Title 3"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "User Name 8",
+    "email": "user8@example.com",
+    "password": "password8",
+    "membership_date": "2015-07-19",
+    "status": "Active",
+    "borrowings": [
+      {
+        "id": 9,
+        "book_title": "Book Title 6"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "User Name 9",
+    "email": "user9@example.com",
+    "password": "password9",
+    "membership_date": "2017-11-14",
+    "status": "Inactive",
+    "borrowings": [
+      {
+        "id": 15,
+        "book_title": "Book Title 11"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "User Name 10",
+    "email": "user10@example.com",
+    "password": "password10",
+    "membership_date": "2017-08-11",
+    "status": "Inactive",
+    "borrowings": [
+      {
+        "id": 17,
+        "book_title": "Book Title 1"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "User Name 11",
+    "email": "user11@example.com",
+    "password": "password11",
+    "membership_date": "2017-10-06",
+    "status": "Banned",
+    "borrowings": [
+      {
+        "id": 12,
+        "book_title": "Book Title 9"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "User Name 12",
+    "email": "user12@example.com",
+    "password": "password12",
+    "membership_date": "2020-09-14",
+    "status": "Active",
+    "borrowings": [
+      {
+        "id": 12,
+        "book_title": "Book Title 7"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "User Name 13",
+    "email": "user13@example.com",
+    "password": "password13",
+    "membership_date": "2020-11-17",
+    "status": "Inactive",
+    "borrowings": [
+      {
+        "id": 2,
+        "book_title": "Book Title 14"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "User Name 14",
+    "email": "user14@example.com",
+    "password": "password14",
+    "membership_date": "2018-05-28",
+    "status": "Inactive",
+    "borrowings": [
+      {
+        "id": 4,
+        "book_title": "Book Title 1"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "User Name 15",
+    "email": "user15@example.com",
+    "password": "password15",
+    "membership_date": "2019-10-02",
+    "status": "Banned",
+    "borrowings": [
+      {
+        "id": 20,
+        "book_title": "Book Title 19"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "User Name 16",
+    "email": "user16@example.com",
+    "password": "password16",
+    "membership_date": "2018-02-01",
+    "status": "Active",
+    "borrowings": [
+      {
+        "id": 6,
+        "book_title": "Book Title 19"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "User Name 17",
+    "email": "user17@example.com",
+    "password": "password17",
+    "membership_date": "2021-09-02",
+    "status": "Inactive",
+    "borrowings": [
+      {
+        "id": 2,
+        "book_title": "Book Title 19"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "User Name 18",
+    "email": "user18@example.com",
+    "password": "password18",
+    "membership_date": "2016-11-11",
+    "status": "Inactive",
+    "borrowings": [
+      {
+        "id": 13,
+        "book_title": "Book Title 7"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "User Name 19",
+    "email": "user19@example.com",
+    "password": "password19",
+    "membership_date": "2018-09-07",
+    "status": "Inactive",
+    "borrowings": [
+      {
+        "id": 8,
+        "book_title": "Book Title 14"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name": "User Name 20",
+    "email": "user20@example.com",
+    "password": "password20",
+    "membership_date": "2015-08-08",
+    "status": "Banned",
+    "borrowings": [
+      {
+        "id": 17,
+        "book_title": "Book Title 18"
+      }
+    ]
+  }
+]

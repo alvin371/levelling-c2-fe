@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "name": "Publisher 1",
+    "address": "168 Publisher St, City, Country",
+    "contact": "+17-8089888"
+  },
+  {
+    "id": 2,
+    "name": "Publisher 2",
+    "address": "446 Publisher St, City, Country",
+    "contact": "+47-6589016"
+  },
+  {
+    "id": 3,
+    "name": "Publisher 3",
+    "address": "647 Publisher St, City, Country",
+    "contact": "+40-9270200"
+  },
+  {
+    "id": 4,
+    "name": "Publisher 4",
+    "address": "769 Publisher St, City, Country",
+    "contact": "+92-3687000"
+  },
+  {
+    "id": 5,
+    "name": "Publisher 5",
+    "address": "537 Publisher St, City, Country",
+    "contact": "+12-2163125"
+  },
+  {
+    "id": 6,
+    "name": "Publisher 6",
+    "address": "460 Publisher St, City, Country",
+    "contact": "+4-7135976"
+  },
+  {
+    "id": 7,
+    "name": "Publisher 7",
+    "address": "590 Publisher St, City, Country",
+    "contact": "+35-5602480"
+  },
+  {
+    "id": 8,
+    "name": "Publisher 8",
+    "address": "319 Publisher St, City, Country",
+    "contact": "+2-5977210"
+  },
+  {
+    "id": 9,
+    "name": "Publisher 9",
+    "address": "334 Publisher St, City, Country",
+    "contact": "+79-9911623"
+  },
+  {
+    "id": 10,
+    "name": "Publisher 10",
+    "address": "462 Publisher St, City, Country",
+    "contact": "+92-7740851"
+  },
+  {
+    "id": 11,
+    "name": "Publisher 11",
+    "address": "489 Publisher St, City, Country",
+    "contact": "+9-5498848"
+  },
+  {
+    "id": 12,
+    "name": "Publisher 12",
+    "address": "801 Publisher St, City, Country",
+    "contact": "+59-9341326"
+  },
+  {
+    "id": 13,
+    "name": "Publisher 13",
+    "address": "503 Publisher St, City, Country",
+    "contact": "+39-8471897"
+  },
+  {
+    "id": 14,
+    "name": "Publisher 14",
+    "address": "791 Publisher St, City, Country",
+    "contact": "+14-4770989"
+  },
+  {
+    "id": 15,
+    "name": "Publisher 15",
+    "address": "758 Publisher St, City, Country",
+    "contact": "+47-7270888"
+  },
+  {
+    "id": 16,
+    "name": "Publisher 16",
+    "address": "419 Publisher St, City, Country",
+    "contact": "+99-2900786"
+  },
+  {
+    "id": 17,
+    "name": "Publisher 17",
+    "address": "924 Publisher St, City, Country",
+    "contact": "+38-7118780"
+  },
+  {
+    "id": 18,
+    "name": "Publisher 18",
+    "address": "649 Publisher St, City, Country",
+    "contact": "+17-5526619"
+  },
+  {
+    "id": 19,
+    "name": "Publisher 19",
+    "address": "811 Publisher St, City, Country",
+    "contact": "+17-1276751"
+  },
+  {
+    "id": 20,
+    "name": "Publisher 20",
+    "address": "972 Publisher St, City, Country",
+    "contact": "+84-5688185"
+  }
+]

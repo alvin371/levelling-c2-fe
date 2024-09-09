@@ -1,0 +1,522 @@
+[
+  {
+    "id": 1,
+    "title": "Book Title 1",
+    "authors": [
+      {
+        "id": 8,
+        "name": "Author 17"
+      }
+    ],
+    "isbn": "1786020525226",
+    "published_date": "2000-09-17",
+    "quantity": 9,
+    "categories": [
+      {
+        "id": 8,
+        "name": "Category 16"
+      }
+    ],
+    "description": "Description for Book 1",
+    "publisher": {
+      "id": 7,
+      "name": "Publisher 9"
+    },
+    "page_count": 728,
+    "language": "English"
+  },
+  {
+    "id": 2,
+    "title": "Book Title 2",
+    "authors": [
+      {
+        "id": 15,
+        "name": "Author 11"
+      }
+    ],
+    "isbn": "9582822467243",
+    "published_date": "2012-02-10",
+    "quantity": 7,
+    "categories": [
+      {
+        "id": 6,
+        "name": "Category 11"
+      }
+    ],
+    "description": "Description for Book 2",
+    "publisher": {
+      "id": 9,
+      "name": "Publisher 2"
+    },
+    "page_count": 969,
+    "language": "French"
+  },
+  {
+    "id": 3,
+    "title": "Book Title 3",
+    "authors": [
+      {
+        "id": 17,
+        "name": "Author 8"
+      }
+    ],
+    "isbn": "4918633617149",
+    "published_date": "2010-08-09",
+    "quantity": 14,
+    "categories": [
+      {
+        "id": 12,
+        "name": "Category 6"
+      }
+    ],
+    "description": "Description for Book 3",
+    "publisher": {
+      "id": 2,
+      "name": "Publisher 9"
+    },
+    "page_count": 299,
+    "language": "Spanish"
+  },
+  {
+    "id": 4,
+    "title": "Book Title 4",
+    "authors": [
+      {
+        "id": 9,
+        "name": "Author 1"
+      }
+    ],
+    "isbn": "6228252813598",
+    "published_date": "2012-08-02",
+    "quantity": 16,
+    "categories": [
+      {
+        "id": 1,
+        "name": "Category 10"
+      }
+    ],
+    "description": "Description for Book 4",
+    "publisher": {
+      "id": 2,
+      "name": "Publisher 9"
+    },
+    "page_count": 499,
+    "language": "French"
+  },
+  {
+    "id": 5,
+    "title": "Book Title 5",
+    "authors": [
+      {
+        "id": 10,
+        "name": "Author 3"
+      }
+    ],
+    "isbn": "1744944538098",
+    "published_date": "2021-12-04",
+    "quantity": 11,
+    "categories": [
+      {
+        "id": 5,
+        "name": "Category 4"
+      }
+    ],
+    "description": "Description for Book 5",
+    "publisher": {
+      "id": 2,
+      "name": "Publisher 10"
+    },
+    "page_count": 929,
+    "language": "Spanish"
+  },
+  {
+    "id": 6,
+    "title": "Book Title 6",
+    "authors": [
+      {
+        "id": 18,
+        "name": "Author 18"
+      }
+    ],
+    "isbn": "4130089713128",
+    "published_date": "2002-05-07",
+    "quantity": 6,
+    "categories": [
+      {
+        "id": 3,
+        "name": "Category 20"
+      }
+    ],
+    "description": "Description for Book 6",
+    "publisher": {
+      "id": 7,
+      "name": "Publisher 10"
+    },
+    "page_count": 694,
+    "language": "German"
+  },
+  {
+    "id": 7,
+    "title": "Book Title 7",
+    "authors": [
+      {
+        "id": 20,
+        "name": "Author 8"
+      }
+    ],
+    "isbn": "2314283837426",
+    "published_date": "2013-11-21",
+    "quantity": 47,
+    "categories": [
+      {
+        "id": 13,
+        "name": "Category 15"
+      }
+    ],
+    "description": "Description for Book 7",
+    "publisher": {
+      "id": 8,
+      "name": "Publisher 2"
+    },
+    "page_count": 776,
+    "language": "English"
+  },
+  {
+    "id": 8,
+    "title": "Book Title 8",
+    "authors": [
+      {
+        "id": 13,
+        "name": "Author 2"
+      }
+    ],
+    "isbn": "5306037038990",
+    "published_date": "2004-08-10",
+    "quantity": 32,
+    "categories": [
+      {
+        "id": 12,
+        "name": "Category 20"
+      }
+    ],
+    "description": "Description for Book 8",
+    "publisher": {
+      "id": 5,
+      "name": "Publisher 5"
+    },
+    "page_count": 384,
+    "language": "French"
+  },
+  {
+    "id": 9,
+    "title": "Book Title 9",
+    "authors": [
+      {
+        "id": 18,
+        "name": "Author 18"
+      }
+    ],
+    "isbn": "7146558468808",
+    "published_date": "2013-09-11",
+    "quantity": 10,
+    "categories": [
+      {
+        "id": 11,
+        "name": "Category 7"
+      }
+    ],
+    "description": "Description for Book 9",
+    "publisher": {
+      "id": 10,
+      "name": "Publisher 3"
+    },
+    "page_count": 446,
+    "language": "Spanish"
+  },
+  {
+    "id": 10,
+    "title": "Book Title 10",
+    "authors": [
+      {
+        "id": 1,
+        "name": "Author 17"
+      }
+    ],
+    "isbn": "5980828559781",
+    "published_date": "2022-12-27",
+    "quantity": 26,
+    "categories": [
+      {
+        "id": 15,
+        "name": "Category 12"
+      }
+    ],
+    "description": "Description for Book 10",
+    "publisher": {
+      "id": 6,
+      "name": "Publisher 9"
+    },
+    "page_count": 724,
+    "language": "English"
+  },
+  {
+    "id": 11,
+    "title": "Book Title 11",
+    "authors": [
+      {
+        "id": 15,
+        "name": "Author 7"
+      }
+    ],
+    "isbn": "7027011072654",
+    "published_date": "2020-07-21",
+    "quantity": 17,
+    "categories": [
+      {
+        "id": 9,
+        "name": "Category 3"
+      }
+    ],
+    "description": "Description for Book 11",
+    "publisher": {
+      "id": 5,
+      "name": "Publisher 5"
+    },
+    "page_count": 566,
+    "language": "Spanish"
+  },
+  {
+    "id": 12,
+    "title": "Book Title 12",
+    "authors": [
+      {
+        "id": 2,
+        "name": "Author 15"
+      }
+    ],
+    "isbn": "7660368739037",
+    "published_date": "2018-10-09",
+    "quantity": 31,
+    "categories": [
+      {
+        "id": 10,
+        "name": "Category 6"
+      }
+    ],
+    "description": "Description for Book 12",
+    "publisher": {
+      "id": 2,
+      "name": "Publisher 5"
+    },
+    "page_count": 800,
+    "language": "German"
+  },
+  {
+    "id": 13,
+    "title": "Book Title 13",
+    "authors": [
+      {
+        "id": 8,
+        "name": "Author 10"
+      }
+    ],
+    "isbn": "4853757220573",
+    "published_date": "2009-10-12",
+    "quantity": 45,
+    "categories": [
+      {
+        "id": 7,
+        "name": "Category 18"
+      }
+    ],
+    "description": "Description for Book 13",
+    "publisher": {
+      "id": 10,
+      "name": "Publisher 9"
+    },
+    "page_count": 826,
+    "language": "English"
+  },
+  {
+    "id": 14,
+    "title": "Book Title 14",
+    "authors": [
+      {
+        "id": 8,
+        "name": "Author 12"
+      }
+    ],
+    "isbn": "6757203129609",
+    "published_date": "2016-08-18",
+    "quantity": 32,
+    "categories": [
+      {
+        "id": 11,
+        "name": "Category 2"
+      }
+    ],
+    "description": "Description for Book 14",
+    "publisher": {
+      "id": 2,
+      "name": "Publisher 3"
+    },
+    "page_count": 707,
+    "language": "English"
+  },
+  {
+    "id": 15,
+    "title": "Book Title 15",
+    "authors": [
+      {
+        "id": 17,
+        "name": "Author 16"
+      }
+    ],
+    "isbn": "3670776775449",
+    "published_date": "2010-01-11",
+    "quantity": 19,
+    "categories": [
+      {
+        "id": 4,
+        "name": "Category 7"
+      }
+    ],
+    "description": "Description for Book 15",
+    "publisher": {
+      "id": 9,
+      "name": "Publisher 2"
+    },
+    "page_count": 113,
+    "language": "German"
+  },
+  {
+    "id": 16,
+    "title": "Book Title 16",
+    "authors": [
+      {
+        "id": 11,
+        "name": "Author 5"
+      }
+    ],
+    "isbn": "6983746620306",
+    "published_date": "2010-01-13",
+    "quantity": 13,
+    "categories": [
+      {
+        "id": 6,
+        "name": "Category 7"
+      }
+    ],
+    "description": "Description for Book 16",
+    "publisher": {
+      "id": 8,
+      "name": "Publisher 8"
+    },
+    "page_count": 750,
+    "language": "English"
+  },
+  {
+    "id": 17,
+    "title": "Book Title 17",
+    "authors": [
+      {
+        "id": 2,
+        "name": "Author 10"
+      }
+    ],
+    "isbn": "7015246831446",
+    "published_date": "2005-09-18",
+    "quantity": 7,
+    "categories": [
+      {
+        "id": 18,
+        "name": "Category 18"
+      }
+    ],
+    "description": "Description for Book 17",
+    "publisher": {
+      "id": 1,
+      "name": "Publisher 10"
+    },
+    "page_count": 442,
+    "language": "German"
+  },
+  {
+    "id": 18,
+    "title": "Book Title 18",
+    "authors": [
+      {
+        "id": 2,
+        "name": "Author 13"
+      }
+    ],
+    "isbn": "8167355407801",
+    "published_date": "2010-11-18",
+    "quantity": 26,
+    "categories": [
+      {
+        "id": 13,
+        "name": "Category 6"
+      }
+    ],
+    "description": "Description for Book 18",
+    "publisher": {
+      "id": 10,
+      "name": "Publisher 5"
+    },
+    "page_count": 667,
+    "language": "French"
+  },
+  {
+    "id": 19,
+    "title": "Book Title 19",
+    "authors": [
+      {
+        "id": 18,
+        "name": "Author 4"
+      }
+    ],
+    "isbn": "5492247116156",
+    "published_date": "2020-04-03",
+    "quantity": 41,
+    "categories": [
+      {
+        "id": 13,
+        "name": "Category 3"
+      }
+    ],
+    "description": "Description for Book 19",
+    "publisher": {
+      "id": 1,
+      "name": "Publisher 10"
+    },
+    "page_count": 846,
+    "language": "German"
+  },
+  {
+    "id": 20,
+    "title": "Book Title 20",
+    "authors": [
+      {
+        "id": 2,
+        "name": "Author 13"
+      }
+    ],
+    "isbn": "2328038833789",
+    "published_date": "2012-12-14",
+    "quantity": 27,
+    "categories": [
+      {
+        "id": 12,
+        "name": "Category 2"
+      }
+    ],
+    "description": "Description for Book 20",
+    "publisher": {
+      "id": 4,
+      "name": "Publisher 7"
+    },
+    "page_count": 160,
+    "language": "German"
+  }
+]

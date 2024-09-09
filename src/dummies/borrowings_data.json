@@ -1,0 +1,322 @@
+[
+  {
+    "id": 1,
+    "user_id": 5,
+    "book_id": 16,
+    "borrowed_date": "2021-09-05",
+    "return_date": "2021-09-30",
+    "status": "Returned",
+    "user": {
+      "id": 18,
+      "name": "User Name 11"
+    },
+    "book": {
+      "id": 6,
+      "title": "Book Title 17"
+    }
+  },
+  {
+    "id": 2,
+    "user_id": 7,
+    "book_id": 17,
+    "borrowed_date": "2021-03-26",
+    "return_date": "2021-04-11",
+    "status": "Borrowed",
+    "user": {
+      "id": 3,
+      "name": "User Name 12"
+    },
+    "book": {
+      "id": 20,
+      "title": "Book Title 8"
+    }
+  },
+  {
+    "id": 3,
+    "user_id": 15,
+    "book_id": 19,
+    "borrowed_date": "2020-01-17",
+    "return_date": "2020-01-26",
+    "status": "Borrowed",
+    "user": {
+      "id": 3,
+      "name": "User Name 10"
+    },
+    "book": {
+      "id": 5,
+      "title": "Book Title 2"
+    }
+  },
+  {
+    "id": 4,
+    "user_id": 11,
+    "book_id": 16,
+    "borrowed_date": "2020-02-20",
+    "return_date": "2020-02-24",
+    "status": "Borrowed",
+    "user": {
+      "id": 4,
+      "name": "User Name 15"
+    },
+    "book": {
+      "id": 7,
+      "title": "Book Title 18"
+    }
+  },
+  {
+    "id": 5,
+    "user_id": 18,
+    "book_id": 2,
+    "borrowed_date": "2020-04-09",
+    "return_date": "2020-05-01",
+    "status": "Returned",
+    "user": {
+      "id": 16,
+      "name": "User Name 6"
+    },
+    "book": {
+      "id": 14,
+      "title": "Book Title 11"
+    }
+  },
+  {
+    "id": 6,
+    "user_id": 11,
+    "book_id": 6,
+    "borrowed_date": "2021-12-11",
+    "return_date": "2021-12-28",
+    "status": "Borrowed",
+    "user": {
+      "id": 9,
+      "name": "User Name 6"
+    },
+    "book": {
+      "id": 19,
+      "title": "Book Title 11"
+    }
+  },
+  {
+    "id": 7,
+    "user_id": 18,
+    "book_id": 10,
+    "borrowed_date": "2021-06-11",
+    "return_date": "2021-06-23",
+    "status": "Overdue",
+    "user": {
+      "id": 14,
+      "name": "User Name 3"
+    },
+    "book": {
+      "id": 16,
+      "title": "Book Title 13"
+    }
+  },
+  {
+    "id": 8,
+    "user_id": 20,
+    "book_id": 5,
+    "borrowed_date": "2022-07-11",
+    "return_date": "2022-07-26",
+    "status": "Borrowed",
+    "user": {
+      "id": 1,
+      "name": "User Name 14"
+    },
+    "book": {
+      "id": 2,
+      "title": "Book Title 1"
+    }
+  },
+  {
+    "id": 9,
+    "user_id": 6,
+    "book_id": 11,
+    "borrowed_date": "2020-08-17",
+    "return_date": "2020-08-18",
+    "status": "Returned",
+    "user": {
+      "id": 12,
+      "name": "User Name 14"
+    },
+    "book": {
+      "id": 8,
+      "title": "Book Title 3"
+    }
+  },
+  {
+    "id": 10,
+    "user_id": 8,
+    "book_id": 12,
+    "borrowed_date": "2021-10-07",
+    "return_date": "2021-10-28",
+    "status": "Overdue",
+    "user": {
+      "id": 11,
+      "name": "User Name 15"
+    },
+    "book": {
+      "id": 20,
+      "title": "Book Title 10"
+    }
+  },
+  {
+    "id": 11,
+    "user_id": 16,
+    "book_id": 14,
+    "borrowed_date": "2020-08-25",
+    "return_date": "2020-09-01",
+    "status": "Returned",
+    "user": {
+      "id": 6,
+      "name": "User Name 11"
+    },
+    "book": {
+      "id": 6,
+      "title": "Book Title 8"
+    }
+  },
+  {
+    "id": 12,
+    "user_id": 20,
+    "book_id": 6,
+    "borrowed_date": "2020-08-09",
+    "return_date": "2020-08-17",
+    "status": "Returned",
+    "user": {
+      "id": 12,
+      "name": "User Name 20"
+    },
+    "book": {
+      "id": 8,
+      "title": "Book Title 5"
+    }
+  },
+  {
+    "id": 13,
+    "user_id": 15,
+    "book_id": 11,
+    "borrowed_date": "2022-01-25",
+    "return_date": "2022-02-20",
+    "status": "Borrowed",
+    "user": {
+      "id": 4,
+      "name": "User Name 7"
+    },
+    "book": {
+      "id": 18,
+      "title": "Book Title 7"
+    }
+  },
+  {
+    "id": 14,
+    "user_id": 12,
+    "book_id": 1,
+    "borrowed_date": "2021-09-26",
+    "return_date": "2021-10-08",
+    "status": "Overdue",
+    "user": {
+      "id": 14,
+      "name": "User Name 14"
+    },
+    "book": {
+      "id": 19,
+      "title": "Book Title 11"
+    }
+  },
+  {
+    "id": 15,
+    "user_id": 15,
+    "book_id": 6,
+    "borrowed_date": "2021-11-17",
+    "return_date": "2021-11-23",
+    "status": "Overdue",
+    "user": {
+      "id": 2,
+      "name": "User Name 5"
+    },
+    "book": {
+      "id": 2,
+      "title": "Book Title 17"
+    }
+  },
+  {
+    "id": 16,
+    "user_id": 6,
+    "book_id": 9,
+    "borrowed_date": "2021-02-18",
+    "return_date": "2021-03-07",
+    "status": "Returned",
+    "user": {
+      "id": 8,
+      "name": "User Name 16"
+    },
+    "book": {
+      "id": 6,
+      "title": "Book Title 10"
+    }
+  },
+  {
+    "id": 17,
+    "user_id": 11,
+    "book_id": 12,
+    "borrowed_date": "2021-11-15",
+    "return_date": "2021-12-05",
+    "status": "Borrowed",
+    "user": {
+      "id": 1,
+      "name": "User Name 8"
+    },
+    "book": {
+      "id": 11,
+      "title": "Book Title 2"
+    }
+  },
+  {
+    "id": 18,
+    "user_id": 16,
+    "book_id": 5,
+    "borrowed_date": "2021-04-28",
+    "return_date": "2021-05-22",
+    "status": "Returned",
+    "user": {
+      "id": 11,
+      "name": "User Name 11"
+    },
+    "book": {
+      "id": 18,
+      "title": "Book Title 1"
+    }
+  },
+  {
+    "id": 19,
+    "user_id": 16,
+    "book_id": 19,
+    "borrowed_date": "2021-11-28",
+    "return_date": "2021-12-08",
+    "status": "Overdue",
+    "user": {
+      "id": 5,
+      "name": "User Name 6"
+    },
+    "book": {
+      "id": 18,
+      "title": "Book Title 10"
+    }
+  },
+  {
+    "id": 20,
+    "user_id": 18,
+    "book_id": 8,
+    "borrowed_date": "2022-10-01",
+    "return_date": "2022-10-07",
+    "status": "Returned",
+    "user": {
+      "id": 10,
+      "name": "User Name 3"
+    },
+    "book": {
+      "id": 8,
+      "title": "Book Title 14"
+    }
+  }
+]

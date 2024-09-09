@@ -1,0 +1,270 @@
+[
+  {
+    "id": 1,
+    "name": "Category Name 1",
+    "description": "Description for Category 1",
+    "subcategories": [
+      {
+        "id": 7,
+        "name": "Subcategory 8"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Category Name 2",
+    "description": "Description for Category 2",
+    "subcategories": [
+      {
+        "id": 1,
+        "name": "Subcategory 19"
+      }
+    ],
+    "parent_category": {
+      "id": 13,
+      "name": "Category Name 13"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Category Name 3",
+    "description": "Description for Category 3",
+    "subcategories": [
+      {
+        "id": 15,
+        "name": "Subcategory 18"
+      }
+    ],
+    "parent_category": {
+      "id": 17,
+      "name": "Category Name 17"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Category Name 4",
+    "description": "Description for Category 4",
+    "subcategories": [
+      {
+        "id": 10,
+        "name": "Subcategory 20"
+      }
+    ],
+    "parent_category": {
+      "id": 10,
+      "name": "Category Name 10"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Category Name 5",
+    "description": "Description for Category 5",
+    "subcategories": [
+      {
+        "id": 7,
+        "name": "Subcategory 8"
+      }
+    ],
+    "parent_category": {
+      "id": 10,
+      "name": "Category Name 10"
+    }
+  },
+  {
+    "id": 6,
+    "name": "Category Name 6",
+    "description": "Description for Category 6",
+    "subcategories": [
+      {
+        "id": 18,
+        "name": "Subcategory 18"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Category Name 7",
+    "description": "Description for Category 7",
+    "subcategories": [
+      {
+        "id": 14,
+        "name": "Subcategory 6"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Category Name 8",
+    "description": "Description for Category 8",
+    "subcategories": [
+      {
+        "id": 13,
+        "name": "Subcategory 2"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Category Name 9",
+    "description": "Description for Category 9",
+    "subcategories": [
+      {
+        "id": 9,
+        "name": "Subcategory 5"
+      }
+    ],
+    "parent_category": {
+      "id": 9,
+      "name": "Category Name 9"
+    }
+  },
+  {
+    "id": 10,
+    "name": "Category Name 10",
+    "description": "Description for Category 10",
+    "subcategories": [
+      {
+        "id": 13,
+        "name": "Subcategory 3"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Category Name 11",
+    "description": "Description for Category 11",
+    "subcategories": [
+      {
+        "id": 16,
+        "name": "Subcategory 3"
+      }
+    ],
+    "parent_category": {
+      "id": 12,
+      "name": "Category Name 12"
+    }
+  },
+  {
+    "id": 12,
+    "name": "Category Name 12",
+    "description": "Description for Category 12",
+    "subcategories": [
+      {
+        "id": 17,
+        "name": "Subcategory 8"
+      }
+    ],
+    "parent_category": {
+      "id": 5,
+      "name": "Category Name 5"
+    }
+  },
+  {
+    "id": 13,
+    "name": "Category Name 13",
+    "description": "Description for Category 13",
+    "subcategories": [
+      {
+        "id": 15,
+        "name": "Subcategory 19"
+      }
+    ],
+    "parent_category": {
+      "id": 5,
+      "name": "Category Name 5"
+    }
+  },
+  {
+    "id": 14,
+    "name": "Category Name 14",
+    "description": "Description for Category 14",
+    "subcategories": [
+      {
+        "id": 16,
+        "name": "Subcategory 12"
+      }
+    ],
+    "parent_category": {
+      "id": 19,
+      "name": "Category Name 19"
+    }
+  },
+  {
+    "id": 15,
+    "name": "Category Name 15",
+    "description": "Description for Category 15",
+    "subcategories": [
+      {
+        "id": 13,
+        "name": "Subcategory 2"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Category Name 16",
+    "description": "Description for Category 16",
+    "subcategories": [
+      {
+        "id": 19,
+        "name": "Subcategory 4"
+      }
+    ],
+    "parent_category": {
+      "id": 20,
+      "name": "Category Name 20"
+    }
+  },
+  {
+    "id": 17,
+    "name": "Category Name 17",
+    "description": "Description for Category 17",
+    "subcategories": [
+      {
+        "id": 14,
+        "name": "Subcategory 16"
+      }
+    ],
+    "parent_category": {
+      "id": 3,
+      "name": "Category Name 3"
+    }
+  },
+  {
+    "id": 18,
+    "name": "Category Name 18",
+    "description": "Description for Category 18",
+    "subcategories": [
+      {
+        "id": 16,
+        "name": "Subcategory 10"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Category Name 19",
+    "description": "Description for Category 19",
+    "subcategories": [
+      {
+        "id": 4,
+        "name": "Subcategory 9"
+      }
+    ],
+    "parent_category": {
+      "id": 4,
+      "name": "Category Name 4"
+    }
+  },
+  {
+    "id": 20,
+    "name": "Category Name 20",
+    "description": "Description for Category 20",
+    "subcategories": [
+      {
+        "id": 4,
+        "name": "Subcategory 7"
+      }
+    ]
+  }
+]

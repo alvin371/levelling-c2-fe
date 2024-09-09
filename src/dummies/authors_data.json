@@ -1,0 +1,262 @@
+[
+    {
+        "id": 1,
+        "name": "Author Name 1",
+        "birthdate": "1994-11-22",
+        "biography": "Biography for Author 1",
+        "nationality": "British",
+        "books": [
+            {
+                "id": 8,
+                "title": "Book Title 20"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Author Name 2",
+        "birthdate": "1954-09-27",
+        "biography": "Biography for Author 2",
+        "nationality": "American",
+        "books": [
+            {
+                "id": 16,
+                "title": "Book Title 13"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Author Name 3",
+        "birthdate": "1958-07-09",
+        "biography": "Biography for Author 3",
+        "nationality": "American",
+        "books": [
+            {
+                "id": 20,
+                "title": "Book Title 18"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Author Name 4",
+        "birthdate": "1964-03-17",
+        "biography": "Biography for Author 4",
+        "nationality": "Canadian",
+        "books": [
+            {
+                "id": 10,
+                "title": "Book Title 7"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Author Name 5",
+        "birthdate": "1965-01-07",
+        "biography": "Biography for Author 5",
+        "nationality": "Australian",
+        "books": [
+            {
+                "id": 5,
+                "title": "Book Title 13"
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Author Name 6",
+        "birthdate": "1982-10-22",
+        "biography": "Biography for Author 6",
+        "nationality": "American",
+        "books": [
+            {
+                "id": 6,
+                "title": "Book Title 19"
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Author Name 7",
+        "birthdate": "1992-05-04",
+        "biography": "Biography for Author 7",
+        "nationality": "Australian",
+        "books": [
+            {
+                "id": 19,
+                "title": "Book Title 3"
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Author Name 8",
+        "birthdate": "1989-12-01",
+        "biography": "Biography for Author 8",
+        "nationality": "British",
+        "books": [
+            {
+                "id": 17,
+                "title": "Book Title 14"
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Author Name 9",
+        "birthdate": "1958-05-18",
+        "biography": "Biography for Author 9",
+        "nationality": "British",
+        "books": [
+            {
+                "id": 5,
+                "title": "Book Title 6"
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Author Name 10",
+        "birthdate": "1959-10-27",
+        "biography": "Biography for Author 10",
+        "nationality": "British",
+        "books": [
+            {
+                "id": 6,
+                "title": "Book Title 19"
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Author Name 11",
+        "birthdate": "1951-07-27",
+        "biography": "Biography for Author 11",
+        "nationality": "American",
+        "books": [
+            {
+                "id": 6,
+                "title": "Book Title 15"
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "name": "Author Name 12",
+        "birthdate": "1991-10-19",
+        "biography": "Biography for Author 12",
+        "nationality": "Australian",
+        "books": [
+            {
+                "id": 20,
+                "title": "Book Title 7"
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Author Name 13",
+        "birthdate": "1980-09-05",
+        "biography": "Biography for Author 13",
+        "nationality": "British",
+        "books": [
+            {
+                "id": 16,
+                "title": "Book Title 12"
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "name": "Author Name 14",
+        "birthdate": "1966-08-14",
+        "biography": "Biography for Author 14",
+        "nationality": "British",
+        "books": [
+            {
+                "id": 17,
+                "title": "Book Title 14"
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "name": "Author Name 15",
+        "birthdate": "1950-09-08",
+        "biography": "Biography for Author 15",
+        "nationality": "Canadian",
+        "books": [
+            {
+                "id": 1,
+                "title": "Book Title 4"
+            }
+        ]
+    },
+    {
+        "id": 16,
+        "name": "Author Name 16",
+        "birthdate": "1992-05-01",
+        "biography": "Biography for Author 16",
+        "nationality": "Canadian",
+        "books": [
+            {
+                "id": 2,
+                "title": "Book Title 18"
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "name": "Author Name 17",
+        "birthdate": "1950-04-15",
+        "biography": "Biography for Author 17",
+        "nationality": "American",
+        "books": [
+            {
+                "id": 7,
+                "title": "Book Title 20"
+            }
+        ]
+    },
+    {
+        "id": 18,
+        "name": "Author Name 18",
+        "birthdate": "1959-09-25",
+        "biography": "Biography for Author 18",
+        "nationality": "Australian",
+        "books": [
+            {
+                "id": 7,
+                "title": "Book Title 5"
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "name": "Author Name 19",
+        "birthdate": "1995-01-27",
+        "biography": "Biography for Author 19",
+        "nationality": "Australian",
+        "books": [
+            {
+                "id": 19,
+                "title": "Book Title 9"
+            }
+        ]
+    },
+    {
+        "id": 20,
+        "name": "Author Name 20",
+        "birthdate": "1959-05-10",
+        "biography": "Biography for Author 20",
+        "nationality": "Australian",
+        "books": [
+            {
+                "id": 2,
+                "title": "Book Title 5"
+            }
+        ]
+    }
+]
