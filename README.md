@@ -1,3 +1,13 @@
+## Rules
+
+- Install wakatime pada code editor
+- Register pada https://wakatime.com/
+- Copy api key pada https://wakatime.com/api-key
+- Paste api key pada extensi code editor
+- Clone repository dan memulai development
+
+## About
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
