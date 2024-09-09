@@ -4,6 +4,7 @@ import "./globals.css";
 import Layout from "@/components/layout";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ReactQueryProvider } from "@/components/providers/react-query";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <ReactQueryProvider>
           <AntdRegistry>
-            <Layout>{children}</Layout>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Layout>{children}</Layout>
+            </Suspense>
           </AntdRegistry>
         </ReactQueryProvider>
       </body>
