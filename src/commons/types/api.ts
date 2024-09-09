@@ -18,3 +18,10 @@ export type TIndexQueryParams = {
   order?: string;
   sort_by?: string;
 };
+
+export type TApiResponseError = {
+  error_message: string;
+};
+export type TParseApiErrorResponse = Omit<TApiResponseError, "errors"> & {
+  errors: string;
+};

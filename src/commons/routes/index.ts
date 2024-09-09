@@ -4,6 +4,7 @@ export enum Route {
   REGISTER = "/register",
   DASHBOARD = "/dashboard",
   AUTHOR = "/author",
+  AUTHOR_DETAIL = "/author/",
   AUTHOR_CREATE = "/author/create",
   AUTHOR_EDIT = "/author/edit/:id",
   BOOK = "/book",

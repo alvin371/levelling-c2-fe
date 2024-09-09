@@ -1,18 +1,24 @@
 "use client";
 
 import { Route } from "@/commons/routes";
-import { FilterOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  FilterOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
 import { ActionTable, DataTable, Page, Tabs } from "admiral";
-import { Button } from "antd";
-import { useGetListAuthor } from "../_hooks";
+import { Button, Modal } from "antd";
+import { useDeleteAuthor, useGetListAuthor } from "../_hooks";
 import { ColumnType } from "antd/es/table";
 import { TAuthors } from "../_modules/type";
 import { useRouter } from "next/navigation";
 import { useFilter } from "@/utils/table-filter";
+import RowActionButtons from "admiral/table/row-action-button";
 const AuthorClient = () => {
   const router = useRouter();
   const { implementDataTable, setFilter, filter } = useFilter();
 
+  const { isPending, handleSubmit } = useDeleteAuthor();
   const { data, isLoading } = useGetListAuthor(filter);
 
   const columns: ColumnType<TAuthors>[] = [
@@ -41,8 +47,44 @@ const AuthorClient = () => {
       dataIndex: "nationality",
       key: "nationality",
     },
+    {
+      title: "Action",
+      dataIndex: "id",
+      render: (value, record) => (
+        <RowActionButtons
+          actions={[
+            {
+              type: "view",
+              title: "Detail Author",
+              href: `${Route.AUTHOR_DETAIL}${record.id}`,
+            },
+            {
+              type: "edit",
+              title: "Edit Author",
+              href: `${Route.AUTHOR_EDIT}/${record.id}`,
+            },
+            {
+              type: "delete",
+              title: "Delete Author",
+              onClick: () => {
+                Modal.confirm({
+                  title: "Delete Author",
+                  okType: "danger",
+                  content:
+                    "Data that has been deleted cannot be restored. Are you sure you want to delete this author?",
+                  icon: <DeleteOutlined />,
+                  onOk: () => handleSubmit(record.id.toString()),
+                  okButtonProps: {
+                    loading: isPending,
+                  },
+                });
+              },
+            },
+          ]}
+        />
+      ),
+    },
   ];
-  console.log(data?.meta, "data");
   return (
     <Page
       title="Author"
