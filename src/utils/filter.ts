@@ -2,7 +2,7 @@ import { getErrorStatus } from "./request";
 
 export const createApi = (
   data: any[],
-  cbs: ((data: any, request: Request) => any[])[],
+  cbs: ((data: any[], request: Request) => any[])[],
 ) => {
   try {
     return (request: Request) => {
@@ -11,7 +11,7 @@ export const createApi = (
       return Response.json(paginatedData, { status: 200 });
     };
   } catch (err) {
-    return Response.json(err, { status: getErrorStatus(err) });
+    return () => Response.json(err, { status: getErrorStatus(err) });
   }
 };
 
