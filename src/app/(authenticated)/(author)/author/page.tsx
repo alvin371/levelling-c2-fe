@@ -1,26 +1,17 @@
 "use client";
 
 import { Route, route } from "@/commons/routes";
-import {
-  DeleteOutlined,
-  FilterOutlined,
-  PlusOutlined,
-  SortAscendingOutlined,
-} from "@ant-design/icons";
-import { ActionTable, DataTable, Page, Tabs } from "admiral";
+import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
+import { ActionTable, DataTable, Page } from "admiral";
 import { Button, Modal } from "antd";
 import { useDeleteAuthor, useGetListAuthor } from "../_hooks";
 import { ColumnType } from "antd/es/table";
 import { TAuthors } from "../_modules/type";
-import { useRouter } from "next/navigation";
-import { TFilter, useFilter } from "@/utils/table-filter";
+import { useFilter } from "@/utils/table-filter";
 import RowActionButtons from "admiral/table/row-action-button";
-import { SelectProps } from "antd/lib";
-import { TFilterItem } from "admiral/table/filter-collection/factory";
 import { filterSort } from "../_components/filter";
 
 const AuthorClient = () => {
-  const router = useRouter();
   const { implementDataTable, setFilter, filter } = useFilter();
 
   const { isPending, handleSubmit } = useDeleteAuthor();

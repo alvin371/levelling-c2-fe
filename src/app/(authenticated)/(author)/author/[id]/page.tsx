@@ -1,24 +1,27 @@
 "use client";
 
 import { Page, Section } from "admiral";
-import { Button, Descriptions } from "antd";
+import { Button, Descriptions, Divider, Space, Typography } from "antd";
 import { FC, ReactElement } from "react";
 import { TAuthors } from "../../_modules/type";
-import { Route } from "@/commons/routes";
+import { Route, route } from "@/commons/routes";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { useGetDetailAuthor } from "../../_hooks";
+import { useParams } from "next/navigation";
+import dayjs from "dayjs";
 
-const DetailAuthorModule: FC<{ data?: TAuthors }> = ({
-  data,
-}): ReactElement => {
+const DetailAuthorModule: FC = (): ReactElement => {
+  const params = useParams();
+  const detailAuthor = useGetDetailAuthor(params.id.toString()).data;
   return (
     <Page
-      title="Detail Author"
+      title="Author Details"
       topActions={
-        <>
+        <Space>
           <Button
             type="primary"
             icon={<EditOutlined />}
-            href={Route.AUTHOR_CREATE}
+            href={route(Route.AUTHOR_EDIT, { id: params.id.toString() })}
           >
             Edit Author
           </Button>
@@ -26,25 +29,41 @@ const DetailAuthorModule: FC<{ data?: TAuthors }> = ({
             type="primary"
             danger
             icon={<DeleteOutlined />}
-            href={`${Route.AUTHOR_EDIT}${data?.id}`}
+            // href={`${Route.AUTHOR_DELETE}/${author?.id}`}
           >
             Delete Author
           </Button>
-        </>
+        </Space>
       }
       breadcrumbs={[
         { label: "Dashboard", path: Route.DASHBOARD },
         { label: "Author", path: Route.AUTHOR },
-        { label: "Detail Author", path: Route.AUTHOR_DETAIL },
+        { label: "Author Details", path: Route.AUTHOR_DETAIL },
       ]}
     >
-      <Section title="Detail Author">
-        <Descriptions bordered column={2}>
-          <Descriptions.Item span={2} label="Name">
-            {data?.name}
-          </Descriptions.Item>
-        </Descriptions>
-      </Section>
+      <Descriptions bordered column={2}>
+        <Descriptions.Item label="Name" span={2}>
+          {detailAuthor?.name}
+        </Descriptions.Item>
+        <Descriptions.Item label="Birthdate">
+          {dayjs(detailAuthor?.birthdate).format("DD MMMM YYYY")}
+        </Descriptions.Item>
+        <Descriptions.Item label="Biography" span={2}>
+          {detailAuthor?.biography}
+        </Descriptions.Item>
+        <Descriptions.Item label="Nationality">
+          {detailAuthor?.nationality}
+        </Descriptions.Item>
+        <Descriptions.Item label="Books">
+          {detailAuthor?.books?.map((book) => (
+            <div key={book.id}>{book.title}</div>
+          ))}
+        </Descriptions.Item>
+      </Descriptions>
+      <Divider />
+      <Typography.Text type="secondary">
+        For more details, contact support or view related resources.
+      </Typography.Text>
     </Page>
   );
 };

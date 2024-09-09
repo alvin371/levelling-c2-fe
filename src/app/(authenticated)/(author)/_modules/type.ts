@@ -5,12 +5,12 @@ export type TIndexAuthorsQueryParams = TIndexQueryParams & {
 };
 
 export type TAuthors = {
-  id: number;
+  id?: number;
   name: string;
   birthdate: string;
   biography: string;
   nationality: string;
-  books: {
+  books?: {
     id: number;
     title: string;
   }[];

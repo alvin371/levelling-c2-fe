@@ -20,17 +20,18 @@ import { createZodSync } from "@/utils/zod-sync";
 import { TAuthors } from "../_modules/type";
 import { Route } from "@/commons/routes";
 import dayjs from "dayjs";
+import { useCreateAuthor, useUpdateAuthor } from "../_hooks";
 
-// Define the Zod schema
+// Modify the birthdate schema to transform dayjs object to string
 export const AuthorSchema = z.object({
+  id: z.number().optional(),
   name: z
     .string()
     .min(1, "Name is required")
     .max(255, "Name cannot exceed 255 characters"),
-  birthdate: z
-    .string()
-    .min(1, "Birthdate is required")
-    .max(10, "Invalid date format"),
+  birthdate: z.coerce
+    .date()
+    .transform((date) => dayjs(date)?.format("YYYY-MM-DD")),
   biography: z
     .string()
     .min(1, "Biography is required")
@@ -51,9 +52,13 @@ export const FormAuthor: React.FC<{
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+  const { handleSubmit: createAuthor } = useCreateAuthor();
+  const { handleSubmit: updateAuthor } = useUpdateAuthor();
+
   useEffect(() => {
     if (data) {
       form.setFieldsValue({
+        id: data.id,
         name: data.name,
         birthdate: data.birthdate ? dayjs(data.birthdate) : null,
         biography: data.biography,
@@ -63,51 +68,40 @@ export const FormAuthor: React.FC<{
   }, [data, form]);
 
   const onFinish = async (values: Store) => {
-    const birthdate = values.birthdate
-      ? values.birthdate.format("YYYY-MM-DD")
-      : "";
     const formValue = AuthorSchema.safeParse({
       ...values,
-      birthdate,
+      id: data?.id,
     });
+    await form.validateFields();
     setIsLoading(true);
     try {
       if (formValue.success) {
         if (isUpdate) {
-          // await updateAuthor({ ...formValue.data });
+          updateAuthor({ ...formValue.data });
         } else {
-          // await createAuthor({ ...formValue.data });
+          createAuthor({ ...formValue.data });
         }
-        notification.success({
-          message: `Author ${isUpdate ? "updated" : "created"} successfully`,
-        });
-        router.push(Route.AUTHOR); // Update the route as needed
+        router.push(Route.AUTHOR);
       } else {
-        // Show validation errors if any
-        formValue.error.issues.forEach((issue) => {
-          message.error(issue.message);
-        });
+        message.error("Invalid data");
       }
     } catch (error) {
-      message.error("Data not valid, please check your form");
+      message.error("Data not valid");
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleCancel = () => {
-    router.push(Route.AUTHOR); // Update the route as needed
-  };
-
-  const handleDateChange = (date: dayjs.Dayjs | null) => {
-    form.setFieldsValue({ birthdate: date });
+    router.push(Route.AUTHOR);
   };
 
   return (
     <Page
       title={isUpdate ? "Edit Author" : "Create Author"}
       breadcrumbs={[
-        { label: "Authors", path: Route.AUTHOR },
+        { label: "Dashboard", path: Route.DASHBOARD },
+        { label: "Author", path: Route.AUTHOR },
         {
           label: isUpdate ? "Edit Author" : "Create Author",
           path: isUpdate ? Route.AUTHOR_EDIT : Route.AUTHOR_CREATE,
@@ -151,17 +145,14 @@ export const FormAuthor: React.FC<{
                 </Typography.Text>
                 Birthdate
               </Typography.Title>
-              <Form.Item
-                name="birthdate"
-                rules={[zodSync]}
-                validateTrigger="onBlur"
-                required
-              >
+              <Form.Item name="birthdate" rules={[zodSync]} required>
                 <DatePicker
-                  format="YYYY-MM-DD"
+                  placeholder="Select birthdate"
                   style={{ width: "100%" }}
                   disabled={isLoading}
-                  onChange={handleDateChange}
+                  onChange={(date) => {
+                    form.setFieldsValue({ birthdate: date });
+                  }}
                 />
               </Form.Item>
             </Col>
@@ -172,12 +163,7 @@ export const FormAuthor: React.FC<{
                 </Typography.Text>
                 Biography
               </Typography.Title>
-              <Form.Item
-                name="biography"
-                rules={[zodSync]}
-                validateTrigger="onBlur"
-                required
-              >
+              <Form.Item name="biography" rules={[zodSync]} required>
                 <Input.TextArea
                   placeholder="Enter biography"
                   disabled={isLoading}

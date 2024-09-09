@@ -35,7 +35,6 @@ const normalize = (data: Record<string, unknown>): Record<string, TFilter> => {
   // Flatting data
   const cloneData: Record<string, TFilter> = Object.keys(data).reduce(
     (all, key) => {
-      console.log(all, key);
       // check if the value is object then flatting it
       const dataKey = data[key];
 

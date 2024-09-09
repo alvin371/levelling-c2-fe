@@ -66,7 +66,7 @@ export const useDeleteAuthor = () => {
   };
 };
 
-export const useCreateAuthor = (data: TAuthors) => {
+export const useCreateAuthor = () => {
   const queryClient = useQueryClient();
 
   const createUserMutation = useMutation({
@@ -90,7 +90,7 @@ export const useCreateAuthor = (data: TAuthors) => {
     },
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (data: TAuthors) => {
     createUserMutation.mutate(data);
   };
 
@@ -100,13 +100,14 @@ export const useCreateAuthor = (data: TAuthors) => {
   };
 };
 
-export const useUpdateAuthor = (data: TAuthors) => {
+export const useUpdateAuthor = () => {
   const queryClient = useQueryClient();
 
   const updateUserMutation = useMutation({
     mutationKey: [AuthorQueryKey.UPDATE],
     mutationFn: (data: TAuthors) =>
       api.put<TAuthors>(ENDPOINTS.AUTHORS + "/" + data.id, data),
+
     onSuccess: () => {
       notification.success({
         message: "Author updated successfully",
@@ -125,7 +126,7 @@ export const useUpdateAuthor = (data: TAuthors) => {
     },
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (data: TAuthors) => {
     updateUserMutation.mutate(data);
   };
 
