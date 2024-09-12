@@ -28,7 +28,7 @@ const normalizePagination = (data?: DataTablePagination) => {
   if (!data) return;
   return {
     page: data.page,
-    perPage: data.per_page,
+    per_page: data.per_page,
   };
 };
 

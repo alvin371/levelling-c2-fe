@@ -1,12 +1,11 @@
 "use client";
 
-import { Page, Section } from "admiral";
+import { Page } from "admiral";
 import { Button, Descriptions, Divider, Space, Typography } from "antd";
 import { FC, ReactElement } from "react";
-import { TAuthors } from "../../_modules/type";
 import { Route, route } from "@/commons/routes";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { useGetDetailAuthor } from "../../_hooks";
+import { useGetDetailAuthor } from "../_hooks";
 import { useParams } from "next/navigation";
 import dayjs from "dayjs";
 

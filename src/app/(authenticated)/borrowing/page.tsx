@@ -3,45 +3,56 @@
 import { Route, route } from "@/commons/routes";
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { ActionTable, DataTable, Page } from "admiral";
-import { Button, Modal } from "antd";
-import { useDeleteAuthor, useGetListAuthor } from "../_hooks";
+import { Button, Modal, Tag } from "antd";
 import { ColumnType } from "antd/es/table";
-import { TAuthors } from "../_modules/type";
 import { useFilter } from "@/utils/table-filter";
 import RowActionButtons from "admiral/table/row-action-button";
-import { filterSort } from "../_components/filter";
+import { useDeleteBorrowing, useGetListBorrowing } from "./_hooks";
+import { TBorrowing } from "./_modules/type";
+import { filterSort } from "./_components/filter";
 
-const AuthorClient = () => {
+const BorrowingClient = () => {
   const { implementDataTable, setFilter, filter } = useFilter();
 
-  const { isPending, handleSubmit } = useDeleteAuthor();
-  const { data, isLoading } = useGetListAuthor(filter);
+  const { isPending, handleSubmit } = useDeleteBorrowing();
+  const { data, isLoading } = useGetListBorrowing(filter);
 
-  const columns: ColumnType<TAuthors>[] = [
+  const columns: ColumnType<TBorrowing>[] = [
     {
       title: "ID",
       dataIndex: "id",
       key: "id",
     },
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "User ID",
+      dataIndex: "user_id",
+      key: "user_id",
     },
     {
-      title: "Birthdate",
-      dataIndex: "birthdate",
-      key: "birthdate",
+      title: "Book ID",
+      dataIndex: "book_id",
+      key: "book_id",
     },
     {
-      title: "Biography",
-      dataIndex: "biography",
-      key: "biography",
+      title: "Borrowed Date",
+      dataIndex: "borrowed_date",
+      key: "borrowed_date",
     },
     {
-      title: "Nationality",
-      dataIndex: "nationality",
-      key: "nationality",
+      title: "Return Date",
+      dataIndex: "return_date",
+      key: "return_date",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      render: (value) => {
+        return value === "Borrowed" ? (
+          <Tag color="yellow">{value}</Tag>
+        ) : (
+          <Tag color="green">{value}</Tag>
+        );
+      },
     },
     {
       title: "Action",
@@ -53,23 +64,23 @@ const AuthorClient = () => {
             actions={[
               {
                 type: "view",
-                title: "Detail Author",
-                href: `${Route.AUTHOR_DETAIL}${record.id}`,
+                title: "Detail Borrowings",
+                href: `${Route.BORROWING}/${record.id}`,
               },
               {
                 type: "edit",
-                title: "Edit Author",
-                href: route(Route.AUTHOR_EDIT, { id: recordId! }),
+                title: "Edit Borrowings",
+                href: route(Route.BORROWING_DETAIL, { id: recordId! }),
               },
               {
                 type: "delete",
-                title: "Delete Author",
+                title: "Delete Borrowings",
                 onClick: () => {
                   Modal.confirm({
-                    title: "Delete Author",
+                    title: "Delete Borrowings",
                     okType: "danger",
                     content:
-                      "Data that has been deleted cannot be restored. Are you sure you want to delete this author?",
+                      "Data that has been deleted cannot be restored. Are you sure you want to delete this borrowing item?",
                     icon: <DeleteOutlined />,
                     onOk: () => handleSubmit(recordId!),
                     okButtonProps: {
@@ -86,21 +97,21 @@ const AuthorClient = () => {
   ];
   return (
     <Page
-      title="Author"
+      title="List Borrowing"
       topActions={
         <>
           <Button
             type="primary"
             icon={<PlusOutlined />}
-            href={Route.AUTHOR_CREATE}
+            href={Route.BORROWING_CREATE}
           >
-            Create Author
+            Create Borrowing
           </Button>
         </>
       }
       breadcrumbs={[
         { label: "Dashboard", path: Route.DASHBOARD },
-        { label: "Author", path: Route.AUTHOR },
+        { label: "Borrowing", path: Route.BORROWING },
       ]}
       noStyle
       contentStyle={{ paddingTop: 20 }}
@@ -147,4 +158,4 @@ const AuthorClient = () => {
   );
 };
 
-export default AuthorClient;
+export default BorrowingClient;

@@ -4,15 +4,32 @@ import {
   ClockCircleOutlined,
   MailOutlined,
   NotificationOutlined,
-  PlusOutlined,
 } from "@ant-design/icons";
-import { Button, Typography } from "antd";
+import { Typography } from "antd";
 import { LayoutWithHeader, Page, UserAvatar } from "admiral";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Route } from "@/commons/routes";
 
 const { Title } = Typography;
 
 const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
+  const currentRoute = usePathname();
+
+  // Define the sidebar menu items with their keys and paths
+  const menuItems = [
+    { key: "1", label: "Dashboard", path: Route.DASHBOARD },
+    { key: "2", label: "Author", path: Route.AUTHOR },
+    { key: "3", label: "Book", path: Route.BOOK },
+    { key: "4", label: "Category", path: Route.CATEGORY },
+    { key: "5", label: "Borrowing", path: Route.BORROWING },
+    { key: "6", label: "User", path: Route.USER },
+  ];
+
+  // Find the key of the menu item that matches the current route
+  const selectedKey =
+    menuItems.find((item) => item.path === currentRoute)?.key || "1";
+
   return (
     <LayoutWithHeader
       header={{
@@ -30,33 +47,11 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
       }}
       sidebar={{
         defaultOpenKeys: ["sub1"],
-        defaultSelectedKeys: ["1"],
-        menu: [
-          {
-            key: "1",
-            label: <Link href="/">Dashboard</Link>,
-          },
-          {
-            key: "2",
-            label: <Link href="/author">Author</Link>,
-          },
-          {
-            key: "3",
-            label: <Link href="/book">Book</Link>,
-          },
-          {
-            key: "4",
-            label: <Link href="/category">Category</Link>,
-          },
-          {
-            key: "5",
-            label: <Link href="/borrowing">Borrowing</Link>,
-          },
-          {
-            key: "6",
-            label: <Link href="/user">User</Link>,
-          },
-        ],
+        defaultSelectedKeys: [selectedKey], // Use defaultSelectedKeys instead of selectedKeys
+        menu: menuItems.map((item) => ({
+          key: item.key,
+          label: <Link href={item.path}>{item.label}</Link>,
+        })),
         theme: "light",
         width: 200,
       }}
