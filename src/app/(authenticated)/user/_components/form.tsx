@@ -11,77 +11,88 @@ import {
   Space,
   Typography,
   message,
-  notification,
   DatePicker,
+  Select,
+  Switch,
 } from "antd";
 import { Store } from "antd/es/form/interface";
 import { z } from "zod";
 import { createZodSync } from "@/utils/zod-sync";
-import { TAuthors } from "../_modules/type";
+import { TUsers } from "../_modules/type";
 import { Route } from "@/commons/routes";
 import dayjs from "dayjs";
-import { useCreateAuthor, useUpdateAuthor } from "../_hooks";
+import { useCreateUser, useUpdateUser } from "../_hooks";
+import { bookOption } from "@/commons/enum";
 
-// Modify the birthdate schema to transform dayjs object to string
-export const AuthorSchema = z.object({
+export const UserSchema = z.object({
   id: z.number().optional(),
   name: z
     .string()
     .min(1, "Name is required")
     .max(255, "Name cannot exceed 255 characters"),
-  birthdate: z.coerce
+  email: z
+    .string()
+    .email("Invalid email format")
+    .min(1, "Email is required")
+    .max(255, "Email cannot exceed 255 characters"),
+  password: z
+    .string()
+    .min(1, "Password is required")
+    .max(255, "Password cannot exceed 255 characters"),
+
+  membership_date: z.coerce
     .date()
     .transform((date) => dayjs(date)?.format("YYYY-MM-DD")),
-  biography: z
-    .string()
-    .min(1, "Biography is required")
-    .max(1000, "Biography cannot exceed 1000 characters"),
-  nationality: z
-    .string()
-    .min(1, "Nationality is required")
-    .max(255, "Nationality cannot exceed 255 characters"),
+  status: z.boolean(),
+  borrowings: z.array(z.number()),
 });
 
-const zodSync = createZodSync(AuthorSchema);
+const zodSync = createZodSync(UserSchema);
 
-export const FormAuthor: React.FC<{
-  data?: Partial<TAuthors>;
+export const FormUser: React.FC<{
+  data?: Partial<TUsers>;
   isUpdate?: boolean;
 }> = ({ data, isUpdate = false }) => {
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const { handleSubmit: createAuthor } = useCreateAuthor();
-  const { handleSubmit: updateAuthor } = useUpdateAuthor();
+  const { handleSubmit: createUser } = useCreateUser();
+  const { handleSubmit: updateUser } = useUpdateUser();
 
   useEffect(() => {
     if (data) {
       form.setFieldsValue({
         id: data.id,
         name: data.name,
-        birthdate: data.birthdate ? dayjs(data.birthdate) : null,
-        biography: data.biography,
-        nationality: data.nationality,
+        email: data.email,
+        password: data.password,
+        membership_date: data.membership_date
+          ? dayjs(data.membership_date)
+          : null,
+        status: data.status,
+        borrowings_ids: data.borrowings || [],
       });
     }
   }, [data, form]);
 
   const onFinish = async (values: Store) => {
-    const formValue = AuthorSchema.safeParse({
+    const formValue = UserSchema.safeParse({
       ...values,
       id: data?.id,
     });
+
     await form.validateFields();
     setIsLoading(true);
+
     try {
       if (formValue.success) {
         if (isUpdate) {
-          updateAuthor({ ...formValue.data });
+          updateUser({ ...formValue.data });
         } else {
-          createAuthor({ ...formValue.data });
+          createUser({ ...formValue.data });
         }
-        router.push(Route.AUTHOR);
+        router.push(Route.USER);
       } else {
         message.error("Invalid data");
       }
@@ -93,18 +104,18 @@ export const FormAuthor: React.FC<{
   };
 
   const handleCancel = () => {
-    router.push(Route.AUTHOR);
+    router.push(Route.USER);
   };
 
   return (
     <Page
-      title={isUpdate ? "Edit Author" : "Create Author"}
+      title={isUpdate ? "Edit User" : "Create User"}
       breadcrumbs={[
         { label: "Dashboard", path: Route.DASHBOARD },
-        { label: "Author", path: Route.AUTHOR },
+        { label: "User", path: Route.USER },
         {
-          label: isUpdate ? "Edit Author" : "Create Author",
-          path: isUpdate ? Route.AUTHOR_EDIT : Route.AUTHOR_CREATE,
+          label: isUpdate ? "Edit User" : "Create User",
+          path: isUpdate ? Route.USER_EDIT : Route.USER_CREATE,
         },
       ]}
     >
@@ -143,51 +154,82 @@ export const FormAuthor: React.FC<{
                 <Typography.Text type="danger" style={{ marginRight: "5px" }}>
                   *
                 </Typography.Text>
-                Birthdate
-              </Typography.Title>
-              <Form.Item name="birthdate" rules={[zodSync]} required>
-                <DatePicker
-                  placeholder="Select birthdate"
-                  style={{ width: "100%" }}
-                  disabled={isLoading}
-                  onChange={(date) => {
-                    form.setFieldsValue({ birthdate: date });
-                  }}
-                />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Typography.Title level={5}>
-                <Typography.Text type="danger" style={{ marginRight: "5px" }}>
-                  *
-                </Typography.Text>
-                Biography
-              </Typography.Title>
-              <Form.Item name="biography" rules={[zodSync]} required>
-                <Input.TextArea
-                  placeholder="Enter biography"
-                  disabled={isLoading}
-                  maxLength={1000}
-                />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Typography.Title level={5}>
-                <Typography.Text type="danger" style={{ marginRight: "5px" }}>
-                  *
-                </Typography.Text>
-                Nationality
+                Email
               </Typography.Title>
               <Form.Item
-                name="nationality"
+                name="email"
                 rules={[zodSync]}
                 validateTrigger="onBlur"
                 required
               >
                 <Input
-                  placeholder="Enter nationality"
+                  placeholder="Enter email"
                   disabled={isLoading}
                   maxLength={255}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Typography.Title level={5}>
+                <Typography.Text type="danger" style={{ marginRight: "5px" }}>
+                  *
+                </Typography.Text>
+                Password
+              </Typography.Title>
+              <Form.Item
+                name="password"
+                rules={[zodSync]}
+                validateTrigger="onBlur"
+                required
+              >
+                <Input.Password
+                  placeholder="Enter password"
+                  disabled={isLoading}
+                  maxLength={255}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Typography.Title level={5}>Membership Date</Typography.Title>
+              <Form.Item name="membership_date" rules={[zodSync]} required>
+                <DatePicker
+                  placeholder="Select membership date"
+                  style={{ width: "100%" }}
+                  disabled={isLoading}
+                  onChange={(date) => {
+                    form.setFieldsValue({ membership_date: date });
+                  }}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Typography.Title level={5}>Status</Typography.Title>
+              <Form.Item name="status" rules={[zodSync]} required>
+                <Switch
+                  checked={form.getFieldValue("status")}
+                  onChange={(checked) =>
+                    form.setFieldsValue({ status: checked })
+                  }
+                  disabled={isLoading}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Typography.Title level={5}>Borrowings</Typography.Title>
+              <Form.Item
+                name="borrowings"
+                rules={[zodSync]}
+                validateTrigger="onBlur"
+                required
+              >
+                <Select
+                  mode="multiple"
+                  placeholder="Select borrowings"
+                  disabled={isLoading}
+                  options={bookOption.map((item) => ({
+                    label: item.name,
+                    value: item.id,
+                  }))}
                 />
               </Form.Item>
             </Col>
@@ -208,4 +250,4 @@ export const FormAuthor: React.FC<{
   );
 };
 
-export default FormAuthor;
+export default FormUser;

@@ -1,4 +1,4 @@
-import { FormBook } from "../../_components/form";
+import FormBook from "../_components/form";
 
 const CreateAuthorPage = () => {
   return <FormBook />;

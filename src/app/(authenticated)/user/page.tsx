@@ -74,7 +74,7 @@ const UserClient = () => {
               {
                 type: "edit",
                 title: "Edit User",
-                href: route(Route.USER, { id: recordId! }),
+                href: route(Route.USER_EDIT, { id: recordId! }),
               },
               {
                 type: "delete",

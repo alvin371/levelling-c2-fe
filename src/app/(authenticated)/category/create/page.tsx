@@ -1,7 +1,7 @@
-import FormAuthor from "../_components/form";
+import { FormCategory } from "../_components/form";
 
 const CreateAuthorPage = () => {
-  return <FormAuthor />;
+  return <FormCategory />;
 };
 
 export default CreateAuthorPage;

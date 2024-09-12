@@ -18,7 +18,6 @@ import { z } from "zod";
 import { createZodSync } from "@/utils/zod-sync";
 import { TCategories } from "../_modules/type";
 import { Route } from "@/commons/routes";
-import dayjs from "dayjs";
 import { useCreateCategories, useUpdateCategories } from "../_hooks";
 import { parentCategoryOption, subCategoryOption } from "@/commons/enum";
 
@@ -32,7 +31,7 @@ export const CategorySchema = z.object({
     .string()
     .min(1, "Description is required")
     .max(1000, "Description cannot exceed 1000 characters"),
-  parent_category_id: z.number().optional(),
+  parentCategory_id: z.number().optional(),
   sub_category_ids: z
     .array(z.number())
     .min(1, "At least one sub category is required"),
@@ -40,7 +39,7 @@ export const CategorySchema = z.object({
 
 const zodSync = createZodSync(CategorySchema);
 
-export const FormAuthor: React.FC<{
+export const FormCategory: React.FC<{
   data?: Partial<TCategories>;
   isUpdate?: boolean;
 }> = ({ data, isUpdate = false }) => {
@@ -57,8 +56,8 @@ export const FormAuthor: React.FC<{
         id: data.id,
         name: data.name,
         description: data.description,
-        parent_category_id: data.parent_category_id,
-        sub_category_ids: data.sub_category_ids || [],
+        parentCategory_id: data.parentCategory_id,
+        sub_category_ids: data.subcategories || [],
       });
     }
   }, [data, form]);
@@ -97,10 +96,10 @@ export const FormAuthor: React.FC<{
       title={isUpdate ? "Edit Author" : "Create Author"}
       breadcrumbs={[
         { label: "Dashboard", path: Route.DASHBOARD },
-        { label: "Author", path: Route.AUTHOR },
+        { label: "Category", path: Route.CATEGORY },
         {
-          label: isUpdate ? "Edit Author" : "Create Author",
-          path: isUpdate ? Route.AUTHOR_EDIT : Route.AUTHOR_CREATE,
+          label: isUpdate ? "Edit Category" : "Create Category",
+          path: isUpdate ? Route.CATEGORY_EDIT : Route.CATEGORY_CREATE,
         },
       ]}
     >
@@ -149,24 +148,26 @@ export const FormAuthor: React.FC<{
                 />
               </Form.Item>
             </Col>
-            <Col span={12}>
-              <Typography.Title level={5}>
-                <Typography.Text type="danger" style={{ marginRight: "5px" }}>
-                  *
-                </Typography.Text>
-                Parent Category
-              </Typography.Title>
-              <Form.Item name="parent_category_id" rules={[zodSync]} required>
-                <Select
-                  placeholder="Select parent category"
-                  disabled={isLoading}
-                  options={parentCategoryOption.map((item) => ({
-                    label: item.name,
-                    value: item.id,
-                  }))}
-                />
-              </Form.Item>
-            </Col>
+            {isUpdate && (
+              <Col span={12}>
+                <Typography.Title level={5}>
+                  <Typography.Text type="danger" style={{ marginRight: "5px" }}>
+                    *
+                  </Typography.Text>
+                  Parent Category
+                </Typography.Title>
+                <Form.Item name="parentCategory_id" rules={[zodSync]} required>
+                  <Select
+                    placeholder="Select parent category"
+                    disabled={isLoading}
+                    options={parentCategoryOption.map((item) => ({
+                      label: item.name,
+                      value: item.id,
+                    }))}
+                  />
+                </Form.Item>
+              </Col>
+            )}
             <Col span={12}>
               <Typography.Title level={5}>
                 <Typography.Text type="danger" style={{ marginRight: "5px" }}>
@@ -208,4 +209,4 @@ export const FormAuthor: React.FC<{
   );
 };
 
-export default FormAuthor;
+export default FormCategory;

@@ -1,11 +1,15 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { TUsers, TIndexUsersQueryParams } from "../_modules/type";
+import { TIndexUsersQueryParams } from "../_modules/type";
 import { UserQueryKey } from "@/commons/constants";
 import { ENDPOINTS } from "@/commons/endpoints";
 import { api } from "@/utils/fetcher";
 import { TPaginationResponse, TResponse } from "@/commons/types/api";
 import { notification } from "antd";
 import { errorResponse } from "@/utils/error-response";
+import { UserSchema } from "../_components/form";
+import { z } from "zod";
+
+export type TUsers = z.infer<typeof UserSchema>;
 
 export const useGetListUser = (params: TIndexUsersQueryParams) => {
   const userQuery = useQuery({
@@ -110,7 +114,7 @@ export const useUpdateUser = () => {
 
     onSuccess: () => {
       notification.success({
-        message: "Author updated successfully",
+        message: "User updated successfully",
       });
 
       queryClient.invalidateQueries({

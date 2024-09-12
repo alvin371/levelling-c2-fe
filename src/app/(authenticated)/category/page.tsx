@@ -58,7 +58,7 @@ const AuthorClient = () => {
               {
                 type: "edit",
                 title: "Edit Category",
-                href: route(Route.AUTHOR_EDIT, { id: recordId! }),
+                href: route(Route.CATEGORY_EDIT, { id: recordId! }),
               },
               {
                 type: "delete",
