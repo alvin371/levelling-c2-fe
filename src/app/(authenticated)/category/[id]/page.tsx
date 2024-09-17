@@ -48,8 +48,8 @@ const DetailCategoryModule: FC = (): ReactElement => {
           {detailCategory?.description}
         </Descriptions.Item>
         <Descriptions.Item label="Subcategories">
-          {detailCategory?.subcategories?.map((subcategory) => (
-            <div key={subcategory.id}>{subcategory.name}</div>
+          {detailCategory?.sub_category_ids?.map((subcategory) => (
+            <div key={subcategory}>{subcategory}</div>
           ))}
         </Descriptions.Item>
       </Descriptions>
