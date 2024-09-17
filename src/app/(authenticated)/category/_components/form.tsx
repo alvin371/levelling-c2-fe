@@ -57,7 +57,7 @@ export const FormCategory: React.FC<{
         name: data.name,
         description: data.description,
         parentCategory_id: data.parentCategory_id,
-        sub_category_ids: data.subcategories || [],
+        sub_category_ids: data.subcategories?.[0].id,
       });
     }
   }, [data, form]);
@@ -66,6 +66,7 @@ export const FormCategory: React.FC<{
     const formValue = CategorySchema.safeParse({
       ...values,
       id: data?.id,
+      subcategories: [values.sub_category_ids],
     });
     await form.validateFields();
     setIsLoading(true);
@@ -93,7 +94,7 @@ export const FormCategory: React.FC<{
 
   return (
     <Page
-      title={isUpdate ? "Edit Author" : "Create Author"}
+      title={isUpdate ? "Edit Category" : "Create Category"}
       breadcrumbs={[
         { label: "Dashboard", path: Route.DASHBOARD },
         { label: "Category", path: Route.CATEGORY },

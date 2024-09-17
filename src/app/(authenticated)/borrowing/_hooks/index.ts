@@ -1,5 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { TIndexAuthorsQueryParams } from "../_modules/type";
+import {
+  TBorrowing as TDetailBorrowing,
+  TIndexAuthorsQueryParams,
+} from "../_modules/type";
 import { BorrowingQueryKey } from "@/commons/constants";
 import { ENDPOINTS } from "@/commons/endpoints";
 import { api } from "@/utils/fetcher";
@@ -29,7 +32,7 @@ export const useGetDetailBorrowing = (id: string) => {
   const authorQuery = useQuery({
     queryKey: [BorrowingQueryKey.DETAIL, id],
     queryFn: () =>
-      api.get<TResponse<TBorrowing>>(ENDPOINTS.BORROWINGS + "/" + id),
+      api.get<TResponse<TDetailBorrowing>>(ENDPOINTS.BORROWINGS + "/" + id),
     select: (data) => data.data || {},
   });
 

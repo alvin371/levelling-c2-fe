@@ -18,9 +18,9 @@ import { z } from "zod";
 import { createZodSync } from "@/utils/zod-sync";
 import { Route } from "@/commons/routes";
 import dayjs from "dayjs";
-import { TAuthors } from "../../author/_modules/type";
 import { bookOption, userOption } from "@/commons/enum";
 import { useCreateBorrowing, useUpdateBorrowing } from "../_hooks";
+import { TBorrowing } from "../_modules/type";
 
 export const BorrowingSchema = z.object({
   id: z.number().optional(),
@@ -43,7 +43,7 @@ export const BorrowingSchema = z.object({
 const zodSync = createZodSync(BorrowingSchema);
 
 export const FormAuthor: React.FC<{
-  data?: Partial<TAuthors>;
+  data?: Partial<TBorrowing>;
   isUpdate?: boolean;
 }> = ({ data, isUpdate = false }) => {
   const [form] = Form.useForm();
@@ -57,10 +57,11 @@ export const FormAuthor: React.FC<{
     if (data) {
       form.setFieldsValue({
         id: data.id,
-        name: data.name,
-        birthdate: data.birthdate ? dayjs(data.birthdate) : null,
-        biography: data.biography,
-        nationality: data.nationality,
+        name: data.user?.name,
+        book: data.book?.title,
+        borrowed_date: dayjs(data.borrowed_date),
+        return_date: dayjs(data.return_date),
+        status: data.status,
       });
     }
   }, [data, form]);
@@ -79,7 +80,7 @@ export const FormAuthor: React.FC<{
         } else {
           createBorrowing({ ...formValue.data });
         }
-        router.push(Route.AUTHOR);
+        router.push(Route.BORROWING);
       } else {
         message.error("Invalid data");
       }
@@ -91,7 +92,7 @@ export const FormAuthor: React.FC<{
   };
 
   const handleCancel = () => {
-    router.push(Route.AUTHOR);
+    router.push(Route.BORROWING);
   };
 
   return (

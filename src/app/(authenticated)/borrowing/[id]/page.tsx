@@ -20,7 +20,7 @@ const DetailBorrowingModule: FC = (): ReactElement => {
           <Button
             type="primary"
             icon={<EditOutlined />}
-            href={route(Route.AUTHOR_EDIT, { id: params.id.toString() })}
+            href={route(Route.BORROWING_EDIT, { id: params.id.toString() })}
           >
             Edit Borrowing
           </Button>

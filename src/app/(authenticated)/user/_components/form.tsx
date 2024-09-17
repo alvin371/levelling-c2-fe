@@ -43,8 +43,8 @@ export const UserSchema = z.object({
   membership_date: z.coerce
     .date()
     .transform((date) => dayjs(date)?.format("YYYY-MM-DD")),
-  status: z.boolean(),
-  borrowings: z.array(z.number()),
+  status: z.enum(["active", "inactive"]).optional().default("inactive"),
+  borrowing_ids: z.array(z.number()),
 });
 
 const zodSync = createZodSync(UserSchema);
@@ -70,8 +70,8 @@ export const FormUser: React.FC<{
         membership_date: data.membership_date
           ? dayjs(data.membership_date)
           : null,
-        status: data.status,
-        borrowings_ids: data.borrowings || [],
+        status: data.status === "active", // Convert to boolean for Switch
+        borrowing_ids: data.borrowings || [], // Match schema field name
       });
     }
   }, [data, form]);
@@ -80,6 +80,7 @@ export const FormUser: React.FC<{
     const formValue = UserSchema.safeParse({
       ...values,
       id: data?.id,
+      status: values.status ? "active" : "inactive", // Convert boolean to string
     });
 
     await form.validateFields();
@@ -90,11 +91,13 @@ export const FormUser: React.FC<{
         if (isUpdate) {
           updateUser({ ...formValue.data });
         } else {
-          createUser({ ...formValue.data });
+          const { id, ...createData } = formValue.data;
+          createUser({ ...createData });
         }
         router.push(Route.USER);
       } else {
         message.error("Invalid data");
+        console.log("Validation Errors:", formValue.error?.issues);
       }
     } catch (error) {
       message.error("Data not valid");
@@ -208,7 +211,9 @@ export const FormUser: React.FC<{
                 <Switch
                   checked={form.getFieldValue("status")}
                   onChange={(checked) =>
-                    form.setFieldsValue({ status: checked })
+                    form.setFieldsValue({
+                      status: checked ? "active" : "inactive",
+                    })
                   }
                   disabled={isLoading}
                 />
@@ -217,7 +222,7 @@ export const FormUser: React.FC<{
             <Col span={12}>
               <Typography.Title level={5}>Borrowings</Typography.Title>
               <Form.Item
-                name="borrowings"
+                name="borrowing_ids"
                 rules={[zodSync]}
                 validateTrigger="onBlur"
                 required

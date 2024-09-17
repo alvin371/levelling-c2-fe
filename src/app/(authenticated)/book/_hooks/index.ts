@@ -6,6 +6,10 @@ import { api } from "@/utils/fetcher";
 import { TPaginationResponse, TResponse } from "@/commons/types/api";
 import { notification } from "antd";
 import { errorResponse } from "@/utils/error-response";
+import { z } from "zod";
+import { BookSchema } from "../_components/form";
+
+export type TBook = z.infer<typeof BookSchema>;
 
 export const useGetListBooks = (params: TIndexAuthorsQueryParams) => {
   const authorQuery = useQuery({
@@ -71,7 +75,7 @@ export const useCreateBook = () => {
 
   const createUserMutation = useMutation({
     mutationKey: [BookQueryKey.CREATE],
-    mutationFn: (data: TBooks) => api.post<TBooks>(ENDPOINTS.BOOKS, data),
+    mutationFn: (data: TBook) => api.post<TBooks>(ENDPOINTS.BOOKS, data),
     onSuccess: () => {
       notification.success({
         message: "Book created successfully",
@@ -90,7 +94,7 @@ export const useCreateBook = () => {
     },
   });
 
-  const handleSubmit = (data: TBooks) => {
+  const handleSubmit = (data: TBook) => {
     createUserMutation.mutate(data);
   };
 
@@ -105,8 +109,8 @@ export const useUpdateBook = () => {
 
   const updateUserMutation = useMutation({
     mutationKey: [BookQueryKey.UPDATE],
-    mutationFn: (data: TBooks) =>
-      api.put<TBooks>(ENDPOINTS.BOOKS + "/" + data.id, data),
+    mutationFn: (data: TBook) =>
+      api.put<TBook>(ENDPOINTS.BOOKS + "/" + data.id, data),
 
     onSuccess: () => {
       notification.success({
@@ -126,7 +130,7 @@ export const useUpdateBook = () => {
     },
   });
 
-  const handleSubmit = (data: TBooks) => {
+  const handleSubmit = (data: TBook) => {
     updateUserMutation.mutate(data);
   };
 

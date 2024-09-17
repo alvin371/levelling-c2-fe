@@ -9,6 +9,15 @@ export const userOption = [
   { id: 8, name: "Aldes" },
 ];
 
+export const authorOption = [
+  { id: 1, name: "Malcolm Gladwell" },
+  { id: 2, name: "Habiburrahman El Shirazy" },
+  { id: 3, name: "Tere Liye" },
+  { id: 4, name: "Rintik Sedu" },
+  { id: 5, name: "Somay" },
+  { id: 6, name: "Ayu Utami" },
+];
+
 export const bookOption = [
   { id: 1, name: "Outliers" },
   { id: 2, name: "Ketika Cinta Bertasbih" },

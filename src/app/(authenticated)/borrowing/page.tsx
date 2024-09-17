@@ -70,7 +70,7 @@ const BorrowingClient = () => {
               {
                 type: "edit",
                 title: "Edit Borrowings",
-                href: route(Route.BORROWING_DETAIL, { id: recordId! }),
+                href: route(Route.BORROWING_EDIT, { id: recordId! }),
               },
               {
                 type: "delete",
@@ -99,15 +99,13 @@ const BorrowingClient = () => {
     <Page
       title="List Borrowing"
       topActions={
-        <>
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            href={Route.BORROWING_CREATE}
-          >
-            Create Borrowing
-          </Button>
-        </>
+        <Button
+          type="primary"
+          icon={<PlusOutlined />}
+          href={Route.BORROWING_CREATE}
+        >
+          Create Borrowing
+        </Button>
       }
       breadcrumbs={[
         { label: "Dashboard", path: Route.DASHBOARD },

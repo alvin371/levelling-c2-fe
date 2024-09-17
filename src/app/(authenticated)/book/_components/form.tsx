@@ -9,9 +9,9 @@ import {
   Input,
   Row,
   Space,
-  Typography,
   message,
   DatePicker,
+  Select,
 } from "antd";
 import { Store } from "antd/es/form/interface";
 import { z } from "zod";
@@ -20,33 +20,31 @@ import { TBooks } from "../_modules/type";
 import { Route } from "@/commons/routes";
 import dayjs from "dayjs";
 import { useCreateBook, useUpdateBook } from "../_hooks";
+import { authorOption, subCategoryOption } from "@/commons/enum";
 
-// Modify the birthdate schema to transform dayjs object to string
 export const BookSchema = z.object({
+  id: z.number().optional(),
   title: z
     .string()
     .min(1, "Title is required")
     .max(255, "Title cannot exceed 255 characters"),
-  author_ids: z.array(z.number()).min(1, "At least one author is required"),
+  author_ids: z.array(z.number()).min(1, "At least one author ID is required"),
   isbn: z
     .string()
     .min(1, "ISBN is required")
-    .max(13, "ISBN cannot exceed 13 characters"), // Adjust according to ISBN-13 standard
+    .max(13, "ISBN cannot exceed 13 characters"),
   published_date: z.coerce
     .date()
-    .transform((date) => dayjs(date)?.format("YYYY-MM-DD")),
-  quantity: z.number().min(0, "Quantity cannot be less than 0"),
+    .transform((date) => dayjs(date).format("YYYY-MM-DD")),
+  quantity: z.coerce.number().min(0, "Quantity cannot be less than 0"),
   category_ids: z.array(z.number()).min(1, "At least one category is required"),
   description: z
     .string()
     .max(1000, "Description cannot exceed 1000 characters")
     .optional(),
-  publisher_id: z.number().min(1, "Publisher ID is required"),
-  page_count: z.number().min(0, "Page count cannot be less than 0"),
-  language: z
-    .string()
-    .min(2, "Language is required")
-    .max(2, "Language must be a 2-letter ISO code"),
+  publisher_id: z.coerce.number().min(1, "Publisher ID is required"),
+  page_count: z.coerce.number().min(0, "Page count cannot be less than 0"),
+  language: z.string(),
 });
 
 const zodSync = createZodSync(BookSchema);
@@ -81,25 +79,34 @@ export const FormBook: React.FC<{
   }, [data, form]);
 
   const onFinish = async (values: Store) => {
-    const formValue = BookSchema.safeParse({
+    const parsedValues = {
       ...values,
+      quantity: Number(values.quantity),
+      page_count: Number(values.page_count),
+    };
+
+    const formValue = BookSchema.safeParse({
+      ...parsedValues,
       id: data?.id,
     });
-    await form.validateFields();
-    setIsLoading(true);
+
     try {
+      await form.validateFields();
+      setIsLoading(true);
+
       if (formValue.success) {
         if (isUpdate) {
-          // updateBook({ ...formValue.data });
+          await updateBook({ ...formValue.data });
         } else {
-          // createBook({ ...formValue.data });
+          await createBook({ ...formValue.data });
         }
         router.push(Route.BOOK);
       } else {
-        message.error("Invalid data");
+        message.error("Invalid data. Please check your inputs.");
+        console.log("Validation Errors:", formValue.error?.issues);
       }
     } catch (error) {
-      message.error("Data not valid");
+      message.error("Validation failed. Please ensure all fields are correct.");
     } finally {
       setIsLoading(false);
     }
@@ -114,7 +121,7 @@ export const FormBook: React.FC<{
       title={isUpdate ? "Edit Book" : "Create Book"}
       breadcrumbs={[
         { label: "Dashboard", path: Route.DASHBOARD },
-        { label: "Book", path: Route.BOOK },
+        { label: "Books", path: Route.BOOK },
         {
           label: isUpdate ? "Edit Book" : "Create Book",
           path: isUpdate ? Route.BOOK_EDIT : Route.BOOK_CREATE,
@@ -124,26 +131,14 @@ export const FormBook: React.FC<{
       <Row
         style={{
           backgroundColor: "white",
-          paddingTop: "40px",
-          paddingBottom: "40px",
+          padding: "40px",
           borderRadius: "8px",
         }}
       >
-        <Form form={form} onFinish={onFinish} style={{ width: "100%" }}>
+        <Form form={form} onFinish={onFinish} layout="vertical">
           <Row gutter={[16, 16]}>
             <Col span={12}>
-              <Typography.Title level={5}>
-                <Typography.Text type="danger" style={{ marginRight: "5px" }}>
-                  *
-                </Typography.Text>
-                Title
-              </Typography.Title>
-              <Form.Item
-                name="title"
-                rules={[zodSync]}
-                validateTrigger="onBlur"
-                required
-              >
+              <Form.Item label="Title" name="title" rules={[zodSync]} required>
                 <Input
                   placeholder="Enter book title"
                   disabled={isLoading}
@@ -151,93 +146,151 @@ export const FormBook: React.FC<{
                 />
               </Form.Item>
             </Col>
+
             <Col span={12}>
-              <Typography.Title level={5}>
-                <Typography.Text type="danger" style={{ marginRight: "5px" }}>
-                  *
-                </Typography.Text>
-                ISBN
-              </Typography.Title>
-              <Form.Item name="isbn" rules={[zodSync]} required>
+              <Form.Item label="ISBN" name="isbn" rules={[zodSync]} required>
                 <Input
-                  placeholder="Enter ISBN"
+                  placeholder="Enter ISBN (max 13 characters)"
                   disabled={isLoading}
                   maxLength={13}
                 />
               </Form.Item>
             </Col>
+
             <Col span={12}>
-              <Typography.Title level={5}>
-                <Typography.Text type="danger" style={{ marginRight: "5px" }}>
-                  *
-                </Typography.Text>
-                Published Date
-              </Typography.Title>
-              <Form.Item name="published_date" rules={[zodSync]} required>
+              <Form.Item
+                label="Published Date"
+                name="published_date"
+                rules={[zodSync]}
+                required
+              >
                 <DatePicker
                   placeholder="Select published date"
                   style={{ width: "100%" }}
                   disabled={isLoading}
-                  onChange={(date) => {
-                    form.setFieldsValue({ published_date: date });
+                />
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
+              <Form.Item
+                label="Quantity"
+                name="quantity"
+                rules={[zodSync]}
+                required
+              >
+                <Input
+                  type="number"
+                  placeholder="Enter quantity"
+                  min={0}
+                  disabled={isLoading}
+                />
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
+              <Form.Item
+                label="Description"
+                name="description"
+                rules={[zodSync]}
+              >
+                <Input.TextArea
+                  placeholder="Enter description (optional)"
+                  maxLength={1000}
+                  disabled={isLoading}
+                />
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
+              <Form.Item
+                label="Language"
+                name="language"
+                rules={[zodSync]}
+                required
+              >
+                <Input
+                  placeholder="Enter language code (e.g., 'en')"
+                  disabled={isLoading}
+                />
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
+              <Form.Item
+                label="Author"
+                name="author_ids"
+                rules={[zodSync]}
+                required
+              >
+                <Select
+                  placeholder="Select author"
+                  disabled={isLoading}
+                  options={authorOption.map((author) => ({
+                    label: author.name,
+                    value: author.id,
+                  }))}
+                  onChange={(value) => {
+                    form.setFieldsValue({ author_ids: [value] });
                   }}
                 />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Typography.Title level={5}>
-                <Typography.Text type="danger" style={{ marginRight: "5px" }}>
-                  *
-                </Typography.Text>
-                Quantity
-              </Typography.Title>
-              <Form.Item name="quantity" rules={[zodSync]} required>
+              <Form.Item
+                label="Publisher id"
+                name="publisher_id"
+                rules={[zodSync]}
+                required
+              >
+                <Input placeholder="Enter Publisher ID" disabled={isLoading} />
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
+              <Form.Item
+                label="Page Count"
+                name="page_count"
+                rules={[zodSync]}
+                required
+              >
                 <Input
-                  placeholder="Enter quantity"
-                  disabled={isLoading}
                   type="number"
+                  placeholder="Enter number of pages"
                   min={0}
+                  disabled={isLoading}
                 />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Typography.Title level={5}>
-                <Typography.Text type="danger" style={{ marginRight: "5px" }}>
-                  *
-                </Typography.Text>
-                Description
-              </Typography.Title>
-              <Form.Item name="description" rules={[zodSync]} required>
-                <Input.TextArea
-                  placeholder="Enter description"
+              <Form.Item
+                label="Category"
+                name="category_ids"
+                rules={[zodSync]}
+                required
+              >
+                <Select
+                  placeholder="Select category"
                   disabled={isLoading}
-                  maxLength={1000}
-                />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Typography.Title level={5}>
-                <Typography.Text type="danger" style={{ marginRight: "5px" }}>
-                  *
-                </Typography.Text>
-                Language
-              </Typography.Title>
-              <Form.Item name="language" rules={[zodSync]} required>
-                <Input
-                  placeholder="Enter language (e.g., 'en', 'fr')"
-                  disabled={isLoading}
-                  maxLength={2}
+                  options={subCategoryOption.map((category) => ({
+                    label: category.name,
+                    value: category.id,
+                  }))}
+                  onChange={(value) => {
+                    form.setFieldsValue({ category_ids: [value] });
+                  }}
                 />
               </Form.Item>
             </Col>
           </Row>
+
           <Row justify="end" style={{ marginTop: "20px" }}>
             <Space>
               <Button onClick={handleCancel} disabled={isLoading}>
                 Cancel
               </Button>
               <Button type="primary" htmlType="submit" disabled={isLoading}>
-                Save
+                {isUpdate ? "Update" : "Create"}
               </Button>
             </Space>
           </Row>
