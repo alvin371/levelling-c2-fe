@@ -51,15 +51,15 @@ const DetailUserModule: FC = (): ReactElement => {
           {dayjs(detailUser?.membership_date).format("DD MMM YYYY")}
         </Descriptions.Item>
         <Descriptions.Item label="Status" span={2}>
-          {detailUser?.status === "Active" ? (
+          {detailUser?.status === "active" ? (
             <Tag color="green">{detailUser?.status}</Tag>
           ) : (
             <Tag color="red">{detailUser?.status}</Tag>
           )}
         </Descriptions.Item>
         <Descriptions.Item label="Borrowings" span={2}>
-          {detailUser?.borrowings?.map((borrowing) => (
-            <div key={borrowing.id}>{borrowing.book_title}</div>
+          {detailUser?.borrowing_ids?.map((borrowing) => (
+            <div key={borrowing}>{borrowing}</div>
           ))}
         </Descriptions.Item>
       </Descriptions>
